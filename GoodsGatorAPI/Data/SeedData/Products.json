@@ -1,0 +1,38 @@
+[
+  {
+    "Id": "ca29db60-860d-4c8c-9c5c-c525ea2a6f0d",
+    "Name": "Dell Latitude 3410 Laptop",
+    "Description": "Dell Latitude 3410 14\" Notebook - 1920 x 1280 - Core i7 i7-10510U 10th Gen 1.8GHz Quad-core (4 Core) - 8GB RAM - 256GB SSD",
+    "Price": 25000,
+    "ImageUrl": "images/products/laptop/DellLatitude3410Laptop.jpg",
+    "CategoryId": 2,
+    "BrandId": 1
+  },
+  {
+    "Id": "c509bbd3-53cb-46a0-9630-873ff7786aa2",
+    "Name": "Lenovo ideapad L3 laptop",
+    "Description": "Lenovo ideapad L3 laptop, intel 10th Gen core i5-10210U, 8 GB RAM, 1 TB HDD, NVIDIA GeForce MX130 2GB GDDR5 Graphic card, 15.6 inch FHD, Dos, Abyss Blue",
+    "Price": 11445,
+    "ImageUrl": "images/products/laptop/LenovoideapadL3laptop.jpg",
+    "CategoryId": 2,
+    "BrandId": 3
+  },
+  {
+    "Id": "0a8c8a49-539c-416e-9592-ef79cfbeb847",
+    "Name": "Dell Inspiron 15-3593 Laptop",
+    "Description": "2019 Dell Inspiron 3593 Laptop 15.6\", 10th Generation Intel Core i5-1035G1 Processor, 16GB DDR4 RAM 128GB Solid State Drive, HDMI, WiFi, Bluetooth, Windows 10, Black",
+    "Price": 10500,
+    "ImageUrl": "images/products/laptop/DellInspiron15-3593Laptop.jpg",
+    "CategoryId": 2,
+    "BrandId": 1
+  },
+  {
+    "Id": "2273e3a8-b1e5-4bdc-a806-94bd0fce91a2",
+    "Name": "HP 255 G8 Laptop",
+    "Description": "The HP 255 G8 keeps up with mobile workstyles, thanks to a thin and light design. Featuring a narrow border for a high screen-to-body-ratio, this laptop provides ample screen space for crushing your workload or streaming content.",
+    "Price": 10600,
+    "ImageUrl": "images/products/laptop/HP255G8Laptop.png",
+    "CategoryId": 2,
+    "BrandId": 2
+  }
+]
