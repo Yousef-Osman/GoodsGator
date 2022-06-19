@@ -1,5 +1,6 @@
 using GoodsGatorAPI.Data;
 using GoodsGatorAPI.Helpers;
+using GoodsGatorAPI.Middlewares;
 using GoodsGatorAPI.Repositories;
 using GoodsGatorAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -39,6 +40,8 @@ builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 var app = builder.Build();
 
+//app.UseMiddleware<ExceptionMiddleware>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -47,7 +50,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.SeedData();
-
+//app.UseStatusCodePagesWithReExecute("error/{0}");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
