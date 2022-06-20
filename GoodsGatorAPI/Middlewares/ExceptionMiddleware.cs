@@ -31,8 +31,8 @@ public class ExceptionMiddleware
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             var response = _env.IsDevelopment()
-                ? new ExceptionResponse((int)HttpStatusCode.InternalServerError, ex.Message) 
-                : new ExceptionResponse((int)HttpStatusCode.InternalServerError, ex.Message, ex.StackTrace.ToString());
+                ? new ExceptionResponse((int)HttpStatusCode.InternalServerError, ex.Message, ex.StackTrace.ToString()) 
+                : new ExceptionResponse((int)HttpStatusCode.InternalServerError);
 
             var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
             var jsonResponse = JsonSerializer.Serialize(response, options);

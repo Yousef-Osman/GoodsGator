@@ -27,8 +27,8 @@ public class ErrorTestingController : ControllerBase
         return BadRequest(new ApiResponse(400));
     }
 
-    [HttpGet("ValidationRequest/{id}")]
-    public IActionResult GetBadRequestId(int id)
+    [HttpGet("ValidationRequest")]
+    public IActionResult GetBadRequestId(int id, int num)
     {
         return Ok("ValidationRequest works");
     }
@@ -41,6 +41,4 @@ public class ErrorTestingController : ControllerBase
 
         return Ok(str);
     }
-
-
 }

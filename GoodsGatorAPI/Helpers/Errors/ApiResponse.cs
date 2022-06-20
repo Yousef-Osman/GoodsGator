@@ -17,7 +17,7 @@ public class ApiResponse
         return statusCode switch
         {
             400 => "Bad Request",
-            401 => "Unauthorized",
+            401 => "Access Denied, Authorization Required",
             404 => "Resource Not Found",
             500 => "Internal Server Error",
             _ => "Something went wrong!",

@@ -1,9 +1,11 @@
 using GoodsGatorAPI.Data;
 using GoodsGatorAPI.Helpers;
+using GoodsGatorAPI.Helpers.Errors;
 using GoodsGatorAPI.Middlewares;
 using GoodsGatorAPI.Repositories;
 using GoodsGatorAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,20 +39,35 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
+//to override the validation behavior of [ApiController] attribute
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = actionContext =>
+    {
+        var errors = actionContext.ModelState
+        .Where(e => e.Value.Errors.Count > 0)
+        .SelectMany(x => x.Value.Errors)
+        .Select(x => x.ErrorMessage).ToArray();
+
+        return new BadRequestObjectResult(new ApiValidationErrorResponse(errors));
+    };
+});
+
 
 var app = builder.Build();
 
-//app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
 app.SeedData();
-//app.UseStatusCodePagesWithReExecute("error/{0}");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
