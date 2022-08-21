@@ -39,6 +39,11 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
+builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", policy => policy
+    .WithOrigins(builder.Configuration.GetSection("AppSettings:ClientUrl").Value)
+    .AllowAnyHeader()
+    .AllowAnyMethod()));
+
 //to override the validation behavior of [ApiController] attribute
 builder.Services.AddApplicationServices();
 
@@ -55,6 +60,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("CorsPolicy");
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 app.SeedData();
 app.UseHttpsRedirection();
