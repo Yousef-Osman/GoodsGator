@@ -21,7 +21,7 @@ public static class ProductExtensions
         return query;
     }
 
-    public static IQueryable<Product> Search(IQueryable<Product> query, string searchValue)
+    public static IQueryable<Product> Search(this IQueryable<Product> query, string searchValue)
     {
         if (string.IsNullOrWhiteSpace(searchValue))
             return query;
@@ -31,7 +31,7 @@ public static class ProductExtensions
         return query.Where(a => a.Name.ToLower().Contains(searchValue));
     }
 
-    public static IQueryable<Product> Filter(IQueryable<Product> query, string brands, string categories)
+    public static IQueryable<Product> Filter(this IQueryable<Product> query, string brands, string categories)
     {
         var categoryList = new List<string>();
         var brandList = new List<string>();

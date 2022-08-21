@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using GoodsGatorAPI.Extensions;
 using GoodsGatorAPI.Helpers.Errors;
+using GoodsGatorAPI.Helpers.Pagination;
 using GoodsGatorAPI.Models.DbEntities;
 using GoodsGatorAPI.Models.DTOs;
 using GoodsGatorAPI.Repositories.Interfaces;
-using GoodsGatorAPI.Specifications;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodsGatorAPI.Controllers;
@@ -12,12 +12,12 @@ namespace GoodsGatorAPI.Controllers;
 [ApiController]
 public class ProductsController : ControllerBase
 {
-    private readonly IGenericRepository<Product> _productRepo;
+    private readonly IProductRepository _productRepo;
     private readonly IGenericRepository<Brand> _brandRepo;
     private readonly IGenericRepository<Category> _categoryRepo;
     private readonly IMapper _mapper;
 
-    public ProductsController(IGenericRepository<Product> productRepo,
+    public ProductsController(IProductRepository productRepo,
                               IGenericRepository<Brand> brandRepo,
                               IGenericRepository<Category> CategoryRepo,
                               IMapper mapper)
@@ -33,8 +33,7 @@ public class ProductsController : ControllerBase
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetProductAsync(string id)
     {
-        var spec = new ProductWithCategoryAndBrandSpec(id);
-        var product = await _productRepo.GetEntityWithSpecAsync(spec);
+        var product = await _productRepo.GetProductAsync(id);
 
         if (product == null)
             return NotFound(new ApiResponse(404));
@@ -43,11 +42,13 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetProductsAsync()
+    public async Task<IActionResult> GetProductsAsync([FromQuery] ProductParams productParams)
     {
-        var spec = new ProductWithCategoryAndBrandSpec();
-        var products = await _productRepo.GetAllWithSpecAsync(spec);
-        return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDTO>>(products));
+        var products = await _productRepo.GetProductsAsync(productParams);
+        Response.AddPaginationHeaders(products.MetaData);
+        var productsDto = _mapper.Map<PagedList<Product>, IReadOnlyList<ProductDTO>>(products);
+
+        return Ok(productsDto);
     }
 
     [HttpGet("Brands/{id}")]

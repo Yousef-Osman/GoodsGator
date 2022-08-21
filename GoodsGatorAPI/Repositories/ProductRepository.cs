@@ -1,4 +1,6 @@
 ﻿using GoodsGatorAPI.Data;
+using GoodsGatorAPI.Extensions;
+using GoodsGatorAPI.Helpers.Pagination;
 using GoodsGatorAPI.Models.DbEntities;
 using GoodsGatorAPI.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -20,10 +22,16 @@ public class ProductRepository : IProductRepository
             .Where(a => a.IsDeleted == false).FirstOrDefaultAsync(a => a.Id == id);
     }
 
-    public async Task<IReadOnlyList<Product>> GetProductsAsync()
+    public async Task<PagedList<Product>> GetProductsAsync(ProductParams productParams)
     {
-        return await _context.Products.Include(a=>a.Brand).Include(a=>a.Category)
-            .Where(a => a.IsDeleted == false).ToListAsync();
+        var query = _context.Products
+            .Sort(productParams.OrderBy)
+            .Search(productParams.SearchValue)
+            .Filter(productParams.Brands, productParams.Categories)
+            .Where(a => a.IsDeleted == false)
+            .AsQueryable();
+
+        return await PagedList<Product>.ToPagedListAsync(query, productParams.PageNumber, productParams.PageSize);
     }
 
     public async Task<Brand> GetBrandAsync(int id)
