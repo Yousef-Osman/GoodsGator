@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GoodsGatorAPI.Helpers.Errors;
 using GoodsGatorAPI.Models.DbEntities;
 using GoodsGatorAPI.Models.DTOs;
 using GoodsGatorAPI.Repositories.Interfaces;
@@ -28,13 +29,15 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetProductAsync(string id)
     {
         var spec = new ProductWithCategoryAndBrandSpec(id);
         var product = await _productRepo.GetEntityWithSpecAsync(spec);
 
         if (product == null)
-            return NotFound();
+            return NotFound(new ApiResponse(404));
 
         return Ok(_mapper.Map<Product, ProductDTO>(product));
     }
@@ -52,7 +55,7 @@ public class ProductsController : ControllerBase
     {
         var brand = await _brandRepo.GetByIdAsync(id);
         if (brand == null || brand.IsDeleted)
-            return NotFound();
+            return NotFound(new ApiResponse(404));
 
         return Ok(brand);
     }
@@ -69,7 +72,7 @@ public class ProductsController : ControllerBase
         var category = await _categoryRepo.GetByIdAsync(id);
 
         if (category == null || category.IsDeleted)
-            return NotFound();
+            return NotFound(new ApiResponse(404));
 
         return Ok(category);
     }
