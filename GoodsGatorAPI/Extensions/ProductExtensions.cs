@@ -33,10 +33,10 @@ public static class ProductExtensions
 
     public static IQueryable<Product> Filter(this IQueryable<Product> query, List<int> brands, List<int> categories)
     {
-        if (categories.Count > 0)
+        if (categories != null &&  categories.Count > 0)
             query = query.Where(a => categories.Contains(a.Category.Id));
 
-        if (brands.Count > 0)
+        if (brands != null && brands.Count > 0)
             query = query.Where(a => brands.Contains(a.Brand.Id));
 
         return query;
