@@ -4,6 +4,7 @@ import { ShopComponent } from './shop.component';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SidebarFiltersComponent } from './sidebar-filters/sidebar-filters.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -15,7 +16,8 @@ import { SidebarFiltersComponent } from './sidebar-filters/sidebar-filters.compo
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgbModule
   ],
   exports: [
     ShopComponent

@@ -4,9 +4,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Product } from '../shared/interfaces/product';
 import { Category } from '../shared/interfaces/category';
 import { Brand } from '../shared/interfaces/brand';
-import { Pagination } from '../shared/interfaces/pagination';
 import { map } from 'rxjs';
 import { PaginatedResponse } from '../shared/models/paginated-response';
+import { ProductParams } from '../shared/models/product-params';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +17,8 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts() {
-    let params = new HttpParams();
-
-    params = params.append('pageNumber', '1');
-    params = params.append('pageSize', '6');
-    params = params.append('categories', '2');
-    params = params.append('categories', '3');
-    params = params.append('brands', '1');
-    params = params.append('brands', '2');
+  getProducts(productParams: ProductParams) {
+    let params = this.setQueryParames(productParams);
 
     return this.http.get<Product[]>(this.baseUrl + "products", { observe: 'response', params })
       .pipe(
@@ -47,5 +40,22 @@ export class ShopService {
 
   getCategories() {
     return this.http.get<Category[]>(this.baseUrl + "products/Categories");
+  }
+
+  setQueryParames(productParams: ProductParams): HttpParams {
+    let params = new HttpParams();
+
+    params = params.append('pageNumber', productParams.pageNumber.toString());
+    params = params.append('pageSize', productParams.pageSize.toString());
+    params = (productParams.orderBy) ? params.append('orderBy', productParams.orderBy) : params;
+    params = (productParams.searchValue) ? params.append('searchValue', productParams.searchValue) : params;
+
+    if (productParams.categories !== null && productParams.categories.length > 1)
+      productParams.categories.forEach(c => params = params.append('categories', c.toString()));
+
+    if (productParams.brands !== null && productParams.brands.length > 1)
+      productParams.brands.forEach(b => params = params.append('brands', b.toString()));
+
+    return params;
   }
 }
