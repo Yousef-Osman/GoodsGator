@@ -34,5 +34,77 @@
     "ImageUrl": "images/products/laptop/HP255G8Laptop.png",
     "CategoryId": 2,
     "BrandId": 2
+  },
+  {
+    "Id": "4935e3a8-ght5-7gdc-t906-35dd0fce91a2",
+    "Name": "Apple MacBook Pro 2021",
+    "Description": "Apple M1 Pro or M1 Max chip for a massive leap in CPU, GPU and machine learning performance. Up to 10-core CPU delivers up to 3.7x faster performance to fly through pro workflows quicker than ever.",
+    "Price": 44799,
+    "ImageUrl": "images/products/laptop/MacBookPro2021.jpg",
+    "CategoryId": 2,
+    "BrandId": 6
+  },
+  {
+    "Id": "k5ty4ba4-u9hl-y4no-6jo2-35d4935e3aa2",
+    "Name": "Alienware M15 R6 Gaming Laptop",
+    "Description": "Dell Alienware m15 R6 Laptop 15.6 inch Non-Touch Screen Dark Side of the Moon. Intel Core i7 11th Gen i7-11800H Eight-Core Processor 2.3GHz (4.6GHz With Turbo Boost). 256GB SSD Hard Drive & 8GB RAM Memory",
+    "Price": 27300,
+    "ImageUrl": "images/products/laptop/AlienwareM15R6GamingLaptop.jpg",
+    "CategoryId": 2,
+    "BrandId": 1
+  },
+  {
+    "Id": "t6b75pog-6jo2-5p8b-p9jk-yi58935eqi95",
+    "Name": "Apple MacBook Pro M1",
+    "Description": "Apple-designed M1 chip for a giant leap in CPU, GPU, and machine learning performance. Get more done with up to 20 hours of battery life, the longest ever in a Mac. 16-core Neural Engine for advanced machine learning",
+    "Price": 32900,
+    "ImageUrl": "images/products/laptop/AppleMacBookPro11.jpg",
+    "CategoryId": 2,
+    "BrandId": 6
+  },
+  {
+    "Id": "ejt59a2u-3l94-qi82-yo5o-q9t89hieqr3o",
+    "Name": "Asus ROG Strix Gaming Laptop",
+    "Description": "Asus ROG Strix SCAR G533QS-HF017T Gaming Laptop, AMD Ryzen 9-5900HX - 32GB - 1TB SSD - RTX 3080 - 15.6-inch FHD - Win10 - 90NR0551-M000T0 - Black",
+    "Price": 70038,
+    "ImageUrl": "images/products/laptop/AsusROGStrixGamingLaptop.jpg",
+    "CategoryId": 2,
+    "BrandId": 5
+  },
+  {
+    "Id": "4d3c3c12-aedb-4b0d-92cc-eb0209110071",
+    "Name": "Dell S2421HN HD LED Monitor",
+    "Description": "Aspect ratio: 16:9. Screen size: 24 Inches. Item weight: 12.96 Pounds. Hardware interface: VGA, USB, HDMI. Model number: S2421HN. Brand: Dell. Monitor Type: LED. Model number: S2421HN",
+    "Price": 3479,
+    "ImageUrl": "images/products/accessories/DellS2421HNHDLEDMonitor.jpg",
+    "CategoryId": 3,
+    "BrandId": 1
+  },
+  {
+    "Id": "cf1ccb93-81a3-4267-8420-ffc025e4eb59",
+    "Name": "Samsung 27 inch LED Monitor",
+    "Description": "Aspect ratio: 16:9. Response time: 4 Milliseconds. Specific uses for product: Gaming. Brand: SAMSUNG. Screen size: 27 Inches. Colour: Black. Item weight: 5680 Grams. Model number: LC27F390FHMXUE.",
+    "Price": 3899,
+    "ImageUrl": "images/products/accessories/Samsung27inchLEDMonitor.jpg",
+    "CategoryId": 3,
+    "BrandId": 7
+  },
+  {
+    "Id": "659f4bd2-6776-4058-9fee-eee3c96c5af1",
+    "Name": "HP Z3700 Wireless Mouse",
+    "Description": "Highly accurate-1,200 optical sensors give you exceptional accuracy and incredible speed. Good Quality with a high end. HP Z3700 Wireless Mouse - Black Onyx. Easy to use. Personal Computer type",
+    "Price": 399,
+    "ImageUrl": "images/products/accessories/HPZ3700WirelessMouse.jpg",
+    "CategoryId": 3,
+    "BrandId": 2
+  },
+  {
+    "Id": "40a2bb25-4c92-430a-9c3c-ee9e28317f39",
+    "Name": "HP 330 Wireless Mouse & Keyboard Combination Arab",
+    "Description": "This keyboard and mouse are ergonomically designed to fit your natural comfortable position. Left, right, and scroll wheel mouse buttons keep your motions in control. LED indicators illuminate Number Lock, Caps Lock, and Scroll Lock so you don't have to guess what's on or off. One less thing.",
+    "Price": 550.51,
+    "ImageUrl": "images/products/accessories/HP330WirelessMouseKeyboard.jpg",
+    "CategoryId": 3,
+    "BrandId": 2
   }
 ]
