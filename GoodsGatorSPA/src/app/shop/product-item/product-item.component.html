@@ -1,0 +1,11 @@
+<div class="card h-100 shadow-sm">
+    <img src="{{product.imageUrl}}" alt="{{product.name}}" class="image-fluid p-3 card-image-style border-bottom">
+
+    <div class="card-body d-flex justify-content-between align-items-start">
+        <div>
+            <p class="title mb-1 text-muted"> {{product.name}}</p>
+            <p class="price-text mb-0">{{product.price | currency:'EGP ':true:"1.0-2"}}</p>
+        </div>
+        <fa-icon class="btn btn-outline-secondary btn-sm" [icon]="['fas', 'cart-shopping']"></fa-icon>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+.text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-image-style {
+    height: 220px;
+    object-fit: contain;
+}
+
+.price-text {
+    color: #212529;
+    font-weight: 600;
+}
+
+.title {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.title:hover {
+    cursor: pointer;
+    color: #0d6efd !important;
+}

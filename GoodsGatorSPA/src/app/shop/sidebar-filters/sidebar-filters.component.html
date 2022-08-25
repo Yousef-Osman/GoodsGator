@@ -1,0 +1,65 @@
+<button class="btn btn-outline-secondary mb-3 w-100  d-lg-none" data-bs-toggle="collapse" data-bs-target="#aside_filter">Show filter</button>
+
+<!-- ===== Card for sidebar filter ===== -->
+<div id="aside_filter" class="collapse card d-lg-block mb-5">
+
+    <article class="filter-group">
+        <header class="card-header">
+            <a href="#" class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside1" aria-expanded="true">
+                <i class="icon-control fa fa-chevron-down"></i> Categories
+            </a>
+        </header>
+        <div class="collapse show" id="collapse_aside1">
+            <div class="card-body">
+                <ul class="list-unstyled fw-normal pb-1 small">
+                    <li *ngFor="let category of categories" class="list-group-item py-1">
+                        <a class="list-group-item-action text-decoration-none filter-text" href="#">{{category.name}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </article>
+
+    <article class="filter-group">
+        <header class="card-header">
+            <a href="#" class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside_brands">
+                <i class="icon-control fa fa-chevron-down"></i> Brands
+            </a>
+        </header>
+        <div class="collapse show" id="collapse_aside_brands">
+            <div class="card-body">
+
+                <label *ngFor="let brand of brands" class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" value="">
+          <span class="form-check-label"> {{brand.name}} </span>
+          <b class="badge rounded-pill bg-gray-dark float-end">120</b>
+        </label>
+            </div>
+        </div>
+    </article>
+
+    <article class="filter-group">
+        <header class="card-header">
+            <a href="#" class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside2">
+                <i class="icon-control fa fa-chevron-down"></i> Price
+            </a>
+        </header>
+        <div class="collapse show" id="collapse_aside2">
+            <div class="card-body">
+                <input type="range" class="form-range" min="0" max="100">
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <label for="min" class="form-label">Min</label>
+                        <input class="form-control" id="min" placeholder="$0" type="number">
+                    </div>
+
+                    <div class="col-6">
+                        <label for="max" class="form-label">Max</label>
+                        <input class="form-control" id="max" placeholder="$1,0000" type="number">
+                    </div>
+                </div>
+                <button class="btn btn-light w-100" type="button">Apply</button>
+            </div>
+        </div>
+    </article>
+</div>
