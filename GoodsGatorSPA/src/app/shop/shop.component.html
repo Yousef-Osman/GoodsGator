@@ -8,17 +8,24 @@
 
             <main class="col-lg-9">
 
-                <header class="d-sm-flex align-items-center border-bottom pb-4">
-                    <span>Showing <strong>{{pagination.pageSize}}</strong> of <strong>{{pagination.totalCount}}</strong>
+                <header class="d-sm-flex justify-content-between align-items-center border-bottom pb-4">
+                    <span>Showing <strong>{{pagination?.pageSize}}</strong> of <strong>{{pagination?.totalCount}}</strong>
                         Results</span>
-                    <div class="ms-auto">
+                    <div>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <input class="form-control form-control-sm" placeholder="search">
+                            <fa-icon class="btn btn-outline-primary btn-sm mx-1" [icon]="['fas', 'magnifying-glass']"></fa-icon>
+                            <fa-icon class="btn btn-outline-primary btn-sm" [icon]="['fas', 'arrow-rotate-left']"></fa-icon>
+                        </div>
+                    </div>
+                    <!-- <div class="ms-auto">
                         <select class="form-select d-inline-block w-auto">
                             <option value="0">Best match</option>
                             <option value="1">Recommended</option>
                             <option value="2">High rated</option>
                             <option value="3">Randomly</option>
                         </select>
-                    </div>
+                    </div> -->
                 </header>
 
                 <!-- ========= content items ========= -->

@@ -16,17 +16,21 @@ export class SidebarFiltersComponent implements OnInit {
   constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {
-    
-    this.shopService.getCategories().subscribe({
-      next: (data) => this.categories = data,
-      error:(e)=> console.log(e),
-      complete: () => console.log('complete') 
-    });
-    
+    this.getBrands();
+    this.getCategories();
+  }
+
+  getBrands(){
     this.shopService.getBrands().subscribe({
       next: (data) => this.brands = data,
-      error:(e)=> console.log(e),
-      complete: () => console.log('complete') 
+      error:(e)=> console.log(e)
+    });
+  }
+
+  getCategories(){
+    this.shopService.getCategories().subscribe({
+      next: (data) => this.categories = data,
+      error:(e)=> console.log(e)
     });
   }
 }
