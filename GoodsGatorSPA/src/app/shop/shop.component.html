@@ -2,11 +2,11 @@
     <div class="container">
 
         <div class="row">
-            <aside class="col-lg-3">
+            <aside class="col-12 col-md-3" style="max-width: 20%;">
                 <app-sidebar-filters></app-sidebar-filters>
             </aside>
 
-            <main class="col-lg-9">
+            <main class="col-lg-9" style="flex-grow: 1">
 
                 <header class="d-sm-flex justify-content-between align-items-center pb-4">
                     <span>Showing <strong>{{pagination?.pageSize}}</strong> of <strong>{{pagination?.totalCount}}</strong>
@@ -28,7 +28,7 @@
                     </div> -->
                 </header>
 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
                     <div *ngFor="let item of products" class="col">
                         <app-product-item [product]="item"></app-product-item>
                     </div>

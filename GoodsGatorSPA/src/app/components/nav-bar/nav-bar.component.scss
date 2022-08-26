@@ -1,3 +1,13 @@
 .house {
     color: white;
 }
+
+.custom-column {
+    min-width: 190px;
+}
+
+@media all and (min-width: 991px) {
+    .custom-column {
+        max-width: 20%;
+    }
+}
