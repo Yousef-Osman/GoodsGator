@@ -3,29 +3,32 @@
 
         <div class="row">
             <aside class="col-12 col-md-3" style="max-width: 20%;">
-                <app-sidebar-filters></app-sidebar-filters>
+                <app-sidebar-filters (filters)="setFilters($event)"></app-sidebar-filters>
             </aside>
 
             <main class="col-lg-9" style="flex-grow: 1">
 
                 <header class="d-sm-flex justify-content-between align-items-center pb-4">
-                    <span>Showing <strong>{{pagination?.pageSize}}</strong> of <strong>{{pagination?.totalCount}}</strong>
-                        Results</span>
-                    <div>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <input class="form-control form-control-sm" placeholder="search">
-                            <fa-icon class="btn btn-outline-primary btn-sm mx-1" [icon]="['fas', 'magnifying-glass']"></fa-icon>
-                            <fa-icon class="btn btn-outline-primary btn-sm" [icon]="['fas', 'arrow-rotate-left']"></fa-icon>
-                        </div>
-                    </div>
-                    <!-- <div class="ms-auto">
-                        <select class="form-select d-inline-block w-auto">
-                            <option value="0">Best match</option>
-                            <option value="1">Recommended</option>
-                            <option value="2">High rated</option>
-                            <option value="3">Randomly</option>
+
+                    <span *ngIf="pagination?.totalCount && pagination?.totalCount > 0">
+                        Showing
+                        <strong>
+                            {{(pagination?.currentPage-1) * pagination?.pageSize+1}} -
+                            {{pagination?.currentPage * pagination?.pageSize
+                            > pagination?.totalCount
+                            ? pagination?.totalCount
+                            : pagination?.currentPage*pagination.pageSize
+                            }}
+                        </strong> of <strong>{{pagination?.totalCount}}</strong> Results</span>
+                    <span *ngIf="pagination?.totalCount === 0">
+                        There are <strong>0</strong> results to desplay
+                    </span>
+
+                    <div class="ms-auto">
+                        <select class="form-select form-select-sm d-inline-block w-auto" (change)="sortProducts($event.target.value)">
+                            <option *ngFor="let option of sortOptions" value="{{option.value}}">{{option.displayName}}</option>
                         </select>
-                    </div> -->
+                    </div>
                 </header>
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
@@ -33,12 +36,20 @@
                         <app-product-item [product]="item"></app-product-item>
                     </div>
                 </div>
-
-                <div class="d-flex justify-content-end align-items-center mt-4 ">
-                    <ngb-pagination *ngIf="pagination" [collectionSize]="pagination.totalCount" [(page)]="pagination.currentPage" [maxSize]="3" [pageSize]="pagination.pageSize" (pageChange)="pageChanged(pagination.currentPage)" [ellipses]="true" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+                <hr>
+                <div class="d-flex justify-content-center align-items-center mt-4 ">
+                    <ngb-pagination *ngIf="pagination" [collectionSize]="pagination.totalCount" [(page)]="pagination.currentPage" [maxSize]="3" [pageSize]="pagination.pageSize" (pageChange)="pageChanged(pagination.currentPage)" [ellipses]="true" [rotate]="true">
+                        <ng-template ngbPaginationPrevious>Prev</ng-template>
+                        <ng-template ngbPaginationNext>Next</ng-template>
+                    </ngb-pagination>
                 </div>
 
             </main>
         </div>
     </div>
 </section>
+
+
+
+<!-- <fa-icon [icon]="['fas', 'magnifying-glass']"></fa-icon> -->
+<!-- <fa-icon [icon]="['fas', 'arrow-rotate-left']"></fa-icon> -->

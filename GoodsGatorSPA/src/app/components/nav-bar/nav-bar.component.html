@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container d-flex ">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-1">
+    <div class="container d-flex py-2">
         <div class="custom-column col-md-3">
             <a href="/" class="d-flex align-items-center">
                 <img src="/assets/images/site/GoodsGatorLogoImg.png" alt="GoodsGatorImg" width="30" class="me-1">
@@ -18,21 +18,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="ms-auto navbar-nav mb-2 mb-lg-0">
                 <li>
-                    <a href="#" class="nav-link text-white text-center pb-0 mb-0">
-                        <i style="font-size: 20px;" class="bi bi-cart3 d-block mx-auto"></i>
-                        <p style="font-size: 14px;">Orders</p>
+                    <a href="#" class="nav-link nav-option text-white text-center py-0 my-0">
+                        <i class="bi bi-grid-fill"></i> Shop
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white text-center pb-0 mb-0 mx-2">
-                        <i style="font-size: 20px;" class="bi bi-grid d-block mx-auto"></i>
-                        <p style="font-size: 14px;">Shop</p>
+                    <a href="#" class="nav-link nav-option text-white text-center py-0 my-0 mx-2">
+                        <fa-icon [icon]="['fas', 'cart-shopping']"></fa-icon> Orders
+                        <!-- <i class="bi bi-cart3"></i> Orders -->
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white text-center pb-0 mb-0">
-                        <i style="font-size: 20px;" class="bi bi-person-circle d-block mx-auto"></i>
-                        <p style="font-size: 14px;">Sign in</p>
+                    <a href="#" class="nav-link nav-option text-white text-center py-0 my-0">
+                        <i class="bi bi-person-circle"></i> Sign in
                     </a>
                 </li>
             </ul>

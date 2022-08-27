@@ -7,12 +7,11 @@
             </a>
         </header>
         <div class="collapse show " id="collapse_aside1">
-            <div class="card-body">
-                <ul class="list-unstyled mb-0">
-                    <li *ngFor="let category of categories" class="list-group-item py-1">
-                        <a class="list-group-item-action text-decoration-none filter-text link-label" href="#">{{category.name}}</a>
-                    </li>
-                </ul>
+            <div class="card-body p-2">
+                <div class="list-group rounded-0">
+                    <a *ngFor="let category of categories" (click)="onCategoryChange(category.id)" class="list-group-item list-group-item-action rounded-1 border-0" [class.active]="category.id === filterParams.category" href="#list-home">
+                        {{category.name}}</a>
+                </div>
             </div>
         </div>
     </article>
@@ -27,9 +26,9 @@
             <div class="card-body">
 
                 <label *ngFor="let brand of brands" class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" value="">
+                    <input class="form-check-input" type="checkbox" value="{{brand.id}}" (click)="onBrandClick($event.target)">
                     <span class="form-check-label link-label"> {{brand.name}} </span>
-                    <b class="badge rounded-pill bg-gray-dark float-end">120</b>
+                    <b class="badge rounded-pill bg-gray-dark float-end">{{120}}</b>
                 </label>
             </div>
         </div>
@@ -66,11 +65,12 @@
         </header>
         <div class="collapse show" id="collapse_aside3">
             <div class="card-body">
-                <input type="search" class="form-control form-control-sm my-2" placeholder="Search..." aria-label="Search">
+                <input type="search" [(ngModel)]="filterParams.searchValue" class="form-control form-control-sm my-2" placeholder="Search..." aria-label="Search">
             </div>
         </div>
         <header class="card-header">
-            <button class="btn btn-primary btn-sm w-100 my-2" type="button">Apply</button>
+            <button (click)="applyFilters()" class="btn btn-primary btn-sm w-100 my-2">Apply</button>
+            <button (click)="resetFilters()" class="btn btn-warning btn-sm w-100 mb-2">Reset</button>
         </header>
     </article>
 </div>

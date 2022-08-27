@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Brand } from 'src/app/shared/interfaces/brand';
 import { Category } from 'src/app/shared/interfaces/category';
+import { ProductParams } from 'src/app/shared/models/product-params';
 import { ShopService } from '../shop.service';
 
 @Component({
@@ -12,6 +13,8 @@ export class SidebarFiltersComponent implements OnInit {
 
   brands: Brand[];
   categories: Category[];
+  filterParams = new ProductParams();
+  @Output() filters = new EventEmitter<ProductParams>;
 
   constructor(private shopService: ShopService) { }
 
@@ -20,17 +23,39 @@ export class SidebarFiltersComponent implements OnInit {
     this.getCategories();
   }
 
-  getBrands(){
+  getBrands() {
     this.shopService.getBrands().subscribe({
       next: (data) => this.brands = data,
-      error:(e)=> console.log(e)
+      error: (e) => console.log(e)
     });
   }
 
-  getCategories(){
+  getCategories() {
     this.shopService.getCategories().subscribe({
       next: (data) => this.categories = data,
-      error:(e)=> console.log(e)
+      error: (e) => console.log(e)
     });
+  }
+
+  onCategoryChange(categoryId: number) {
+    this.filterParams.category = categoryId;
+  }
+
+  onBrandClick(target: any) {
+
+    if (target.checked)
+      this.filterParams.brands.push(target.value);
+    else
+      this.filterParams.brands = this.filterParams.brands.filter(el => el !== target.value);
+  }
+
+  applyFilters(){
+    this.filters.emit(this.filterParams);
+  }
+
+  resetFilters(){
+    this.filterParams = new ProductParams();
+    this.filters.emit(this.filterParams);
+    this.ngOnInit();
   }
 }

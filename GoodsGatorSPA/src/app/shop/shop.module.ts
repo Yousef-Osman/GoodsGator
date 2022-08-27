@@ -5,6 +5,7 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SidebarFiltersComponent } from './sidebar-filters/sidebar-filters.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -16,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     FontAwesomeModule,
     NgbModule
   ],

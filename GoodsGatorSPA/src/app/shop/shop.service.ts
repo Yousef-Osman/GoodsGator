@@ -49,11 +49,9 @@ export class ShopService {
     params = params.append('pageSize', productParams.pageSize.toString());
     params = (productParams.orderBy) ? params.append('orderBy', productParams.orderBy) : params;
     params = (productParams.searchValue) ? params.append('searchValue', productParams.searchValue) : params;
+    params = (productParams.category > 0) ? params.append('CategoryId', productParams.category.toString()) : params;
 
-    if (productParams.categories !== null && productParams.categories.length > 1)
-      productParams.categories.forEach(c => params = params.append('categories', c.toString()));
-
-    if (productParams.brands !== null && productParams.brands.length > 1)
+    if (productParams.brands.length > 0)
       productParams.brands.forEach(b => params = params.append('brands', b.toString()));
 
     return params;
