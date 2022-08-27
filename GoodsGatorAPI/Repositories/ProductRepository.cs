@@ -27,8 +27,9 @@ public class ProductRepository : IProductRepository
         var query = _context.Products
             .Sort(productParams.OrderBy)
             .Search(productParams.SearchValue)
-            .Filter(productParams.Brands, productParams.Categories)
+            .Filter(productParams.Brands, productParams.CategoryId)
             .Where(a => a.IsDeleted == false)
+            .Include(a => a.Brand).Include(a => a.Category)
             .AsQueryable();
 
         return await PagedList<Product>.ToPagedListAsync(query, productParams.PageNumber, productParams.PageSize);

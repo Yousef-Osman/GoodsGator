@@ -31,10 +31,10 @@ public static class ProductExtensions
         return query.Where(a => a.Name.ToLower().Contains(searchValue));
     }
 
-    public static IQueryable<Product> Filter(this IQueryable<Product> query, List<int> brands, List<int> categories)
+    public static IQueryable<Product> Filter(this IQueryable<Product> query, List<int> brands, int categoryId)
     {
-        if (categories != null &&  categories.Count > 0)
-            query = query.Where(a => categories.Contains(a.Category.Id));
+        if (categoryId > 0)
+            query = query.Where(a => a.Category.Id == categoryId);
 
         if (brands != null && brands.Count > 0)
             query = query.Where(a => brands.Contains(a.Brand.Id));
