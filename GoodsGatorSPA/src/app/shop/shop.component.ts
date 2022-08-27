@@ -37,7 +37,7 @@ export class ShopComponent implements OnInit {
     });
   }
 
-  pageChanged(newPage) {
+  onPageChanged(newPage) {
     this.productParams.pageNumber = newPage;
     this.loadProducts(this.productParams);
   }
@@ -46,11 +46,13 @@ export class ShopComponent implements OnInit {
     this.productParams.brands = filters.brands;
     this.productParams.category = filters.category;
     this.productParams.searchValue = filters.searchValue;
+    this.productParams.pageNumber = 1; //go to first page after applying filters
     this.loadProducts(this.productParams);
   }
 
   sortProducts(sortOption){
     this.productParams.orderBy = sortOption;
+    this.productParams.pageNumber = 1; //go to first page after applying filters
     this.loadProducts(this.productParams);
   }
 

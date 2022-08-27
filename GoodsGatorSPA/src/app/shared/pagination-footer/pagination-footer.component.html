@@ -1,0 +1,4 @@
+<ngb-pagination [collectionSize]="pagination.totalCount" [(page)]="pagination.currentPage" [maxSize]="3" [pageSize]="pagination.pageSize" (pageChange)="onPageChanged(pagination.currentPage)" [ellipses]="true" [rotate]="true">
+    <ng-template ngbPaginationPrevious>Prev</ng-template>
+    <ng-template ngbPaginationNext>Next</ng-template>
+</ngb-pagination>

@@ -10,23 +10,13 @@
 
                 <header class="d-sm-flex justify-content-between align-items-center pb-4">
 
-                    <span *ngIf="pagination?.totalCount && pagination?.totalCount > 0">
-                        Showing
-                        <strong>
-                            {{(pagination?.currentPage-1) * pagination?.pageSize+1}} -
-                            {{pagination?.currentPage * pagination?.pageSize
-                            > pagination?.totalCount
-                            ? pagination?.totalCount
-                            : pagination?.currentPage*pagination.pageSize
-                            }}
-                        </strong> of <strong>{{pagination?.totalCount}}</strong> Results</span>
-                    <span *ngIf="pagination?.totalCount === 0">
-                        There are <strong>0</strong> results to desplay
-                    </span>
+                    <app-pagination-header *ngIf="pagination" [currentPage]="pagination.currentPage" [pageSize]="pagination.pageSize" [totalCount]="pagination.totalCount">
+                    </app-pagination-header>
 
                     <div class="ms-auto">
                         <select class="form-select form-select-sm d-inline-block w-auto" (change)="sortProducts($event.target.value)">
-                            <option *ngFor="let option of sortOptions" value="{{option.value}}">{{option.displayName}}</option>
+                            <option *ngFor="let option of sortOptions" value="{{option.value}}">{{option.displayName}}
+                            </option>
                         </select>
                     </div>
                 </header>
@@ -38,12 +28,8 @@
                 </div>
                 <hr>
                 <div class="d-flex justify-content-center align-items-center mt-4 ">
-                    <ngb-pagination *ngIf="pagination" [collectionSize]="pagination.totalCount" [(page)]="pagination.currentPage" [maxSize]="3" [pageSize]="pagination.pageSize" (pageChange)="pageChanged(pagination.currentPage)" [ellipses]="true" [rotate]="true">
-                        <ng-template ngbPaginationPrevious>Prev</ng-template>
-                        <ng-template ngbPaginationNext>Next</ng-template>
-                    </ngb-pagination>
+                    <app-pagination-footer *ngIf="pagination" [pagination]="pagination" (pageChanged)="onPageChanged($event)"></app-pagination-footer>
                 </div>
-
             </main>
         </div>
     </div>
