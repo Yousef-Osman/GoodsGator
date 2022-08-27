@@ -7,13 +7,15 @@ import { SidebarFiltersComponent } from './sidebar-filters/sidebar-filters.compo
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 
 @NgModule({
   declarations: [
     ShopComponent,
     ProductItemComponent,
-    SidebarFiltersComponent
+    SidebarFiltersComponent,
+    ProductDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule
   ],
   exports: [
-    ShopComponent
+    ShopComponent,
+    ProductDetailsComponent
   ]
 })
 export class ShopModule { }
