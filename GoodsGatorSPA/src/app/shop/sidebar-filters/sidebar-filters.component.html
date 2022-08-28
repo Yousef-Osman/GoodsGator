@@ -2,14 +2,14 @@
 
     <article class="filter-group">
         <header class="card-header">
-            <a href="#" class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside1" aria-expanded="true">
+            <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside1" aria-expanded="true">
                 <i class="icon-control fa fa-chevron-down"></i> Categories
             </a>
         </header>
         <div class="collapse show " id="collapse_aside1">
             <div class="card-body p-2">
                 <div class="list-group rounded-0">
-                    <a *ngFor="let category of categories" (click)="onCategoryChange(category.id)" class="list-group-item list-group-item-action rounded-1 border-0" [class.active]="category.id === filterParams.category" href="#list-home">
+                    <a *ngFor="let category of categories" (click)="onCategoryChange(category.id)" class="list-group-item list-group-item-action rounded-1 border-0" [class.active]="category.id === filterParams.category">
                         {{category.name}}</a>
                 </div>
             </div>
@@ -18,7 +18,7 @@
 
     <article class="filter-group">
         <header class="card-header">
-            <a href="#" class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside_brands">
+            <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside_brands">
                 <i class="icon-control fa fa-chevron-down"></i> Brands
             </a>
         </header>
@@ -36,7 +36,7 @@
 
     <article class="filter-group">
         <header class="card-header">
-            <a href="#" class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside2">
+            <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside2">
                 <i class="icon-control fa fa-chevron-down"></i> Price
             </a>
         </header>
@@ -59,7 +59,7 @@
     </article>
     <article class="filter-group">
         <header class="card-header">
-            <a href="#" class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside3">
+            <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside3">
                 <i class="icon-control fa fa-chevron-down"></i> Search
             </a>
         </header>
