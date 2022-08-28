@@ -32,8 +32,8 @@ export class ShopComponent implements OnInit {
 
   loadProducts(params: ProductParams) {
     this.shopService.getProducts(params).subscribe({
-      next: (res) => { this.products = res.body, this.pagination = res.pagination },
-      error: (e) => console.log(e),
+      next: res => { this.products = res.body, this.pagination = res.pagination },
+      error: (e) => console.log(e)
     });
   }
 
