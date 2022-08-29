@@ -4,8 +4,6 @@ import { PaginationHeaderComponent } from './pagination-header/pagination-header
 import { PaginationFooterComponent } from './pagination-footer/pagination-footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { AppRoutingModule } from '../app-routing.module';
-
 
 
 @NgModule({
@@ -16,7 +14,6 @@ import { AppRoutingModule } from '../app-routing.module';
   ],
   imports: [
     CommonModule,
-    AppRoutingModule,
     NgbModule
   ],
   exports:[PaginationHeaderComponent, PaginationFooterComponent, NotFoundComponent]

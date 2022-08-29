@@ -6,8 +6,7 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 import { ShopComponent } from './shop/shop.component';
 
 const routes: Routes = [
-  { path: 'products', component: ShopComponent },
-  { path: 'products/:id', component: ProductDetailsComponent },
+  { path: 'products', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule) },
   { path: '', component: HomeComponent },
   { path: '**', component: NotFoundComponent }
 ];

@@ -8,7 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { AppRoutingModule } from '../app-routing.module';
+import { ShopRoutingModule } from './shop-routing.module';
 
 
 @NgModule({
@@ -22,13 +22,9 @@ import { AppRoutingModule } from '../app-routing.module';
     CommonModule,
     FormsModule,
     FontAwesomeModule,
-    AppRoutingModule,
     NgbModule,
-    SharedModule
-  ],
-  exports: [
-    ShopComponent,
-    ProductDetailsComponent
+    SharedModule,
+    ShopRoutingModule
   ]
 })
 export class ShopModule { }
