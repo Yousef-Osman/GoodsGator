@@ -3,19 +3,19 @@ import { CommonModule } from '@angular/common';
 import { PaginationHeaderComponent } from './pagination-header/pagination-header.component';
 import { PaginationFooterComponent } from './pagination-footer/pagination-footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ErrorsComponent } from './components/errors/errors.component';
 
 
 @NgModule({
   declarations: [
     PaginationHeaderComponent,
     PaginationFooterComponent,
-    NotFoundComponent
+    ErrorsComponent
   ],
   imports: [
     CommonModule,
     NgbModule
   ],
-  exports:[PaginationHeaderComponent, PaginationFooterComponent, NotFoundComponent]
+  exports:[PaginationHeaderComponent, PaginationFooterComponent, ErrorsComponent]
 })
 export class SharedModule { }
