@@ -4,6 +4,7 @@ import { PaginationHeaderComponent } from './pagination-header/pagination-header
 import { PaginationFooterComponent } from './pagination-footer/pagination-footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ErrorsComponent } from './components/errors/errors.component';
+import { SharedRoutingModule } from './shared-routing.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ErrorsComponent } from './components/errors/errors.component';
   ],
   imports: [
     CommonModule,
-    NgbModule
+    NgbModule,
+    SharedRoutingModule
   ],
   exports:[PaginationHeaderComponent, PaginationFooterComponent, ErrorsComponent]
 })
