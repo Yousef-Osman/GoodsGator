@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { TestErrorComponent } from './components/test-error/test-error.component';
+import { TestErrorComponent } from './_shared/components/test-error/test-error.component';
 import { ErrorsComponent } from './_shared/components/errors/errors.component';
 
 const routes: Routes = [

@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
-import { TestErrorComponent } from './components/test-error/test-error.component';
+import { TestErrorComponent } from './_shared/components/test-error/test-error.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
