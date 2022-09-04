@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Product } from '../shared/interfaces/product';
-import { Category } from '../shared/interfaces/category';
-import { Brand } from '../shared/interfaces/brand';
 import { map } from 'rxjs';
-import { PaginatedResponse } from '../shared/models/paginated-response';
-import { ProductParams } from '../shared/models/product-params';
+import { Product } from '../_shared/interfaces/product';
+import { Brand } from '../_shared/interfaces/brand';
+import { Category } from '../_shared/interfaces/category';
+import { ProductParams } from '../_shared/models/product-params';
+import { PaginatedResponse } from '../_shared/models/paginated-response';
 
 @Injectable({
   providedIn: 'root'

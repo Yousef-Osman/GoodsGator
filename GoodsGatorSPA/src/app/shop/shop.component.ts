@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from './shop.service';
-import { Product } from '../shared/interfaces/product';
-import { Pagination } from '../shared/interfaces/pagination';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlass as fasMagnifyingGlass, faArrowRotateLeft as fasArrowRotateLeft } from '@fortawesome/free-solid-svg-icons';
-import { ProductParams } from '../shared/models/product-params';
+import { Product } from '../_shared/interfaces/product';
+import { Pagination } from '../_shared/interfaces/pagination';
+import { ProductParams } from '../_shared/models/product-params';
 
 @Component({
   selector: 'app-shop',

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Brand } from 'src/app/shared/interfaces/brand';
-import { Category } from 'src/app/shared/interfaces/category';
-import { ProductParams } from 'src/app/shared/models/product-params';
+import { Brand } from 'src/app/_shared/interfaces/brand';
+import { Category } from 'src/app/_shared/interfaces/category';
+import { ProductParams } from 'src/app/_shared/models/product-params';
 import { ShopService } from '../shop.service';
 
 @Component({

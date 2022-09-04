@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/interfaces/product';
+import { Product } from 'src/app/_shared/interfaces/product';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCartShopping as fasCartShopping } from '@fortawesome/free-solid-svg-icons';
 

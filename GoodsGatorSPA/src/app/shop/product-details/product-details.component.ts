@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from 'src/app/shared/interfaces/product';
-import { ShopService } from '../shop.service';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCartShopping as fasCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { ShopService } from '../shop.service';
+import { Product } from 'src/app/_shared/interfaces/product';
 
 @Component({
   selector: 'app-product-details',
