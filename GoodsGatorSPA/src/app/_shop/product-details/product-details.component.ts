@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCartShopping as fasCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { ShopService } from '../shop.service';
+import { ShopService } from '../../_shop/shop.service';
 import { Product } from 'src/app/_shared/interfaces/product';
 
 @Component({

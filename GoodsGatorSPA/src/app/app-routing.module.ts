@@ -5,7 +5,7 @@ import { TestErrorComponent } from './components/test-error/test-error.component
 import { ErrorsComponent } from './_shared/components/errors/errors.component';
 
 const routes: Routes = [
-  { path: 'products', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule) },
+  { path: 'products', loadChildren: () => import('./_shop/shop.module').then(mod => mod.ShopModule) },
   { path: 'testerror', component: TestErrorComponent },
   { path: 'error/:statusCode', component: ErrorsComponent },
   { path: '', component: HomeComponent },
