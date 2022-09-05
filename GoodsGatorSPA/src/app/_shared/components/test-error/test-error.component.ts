@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TestErrorComponent implements OnInit {
   baseUrl: string = environment.apiUrl;
+  validationErrors:any;
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +26,7 @@ export class TestErrorComponent implements OnInit {
   get400ValidationError(){
     this.http.get(this.baseUrl + 'ErrorTesting/ValidationRequest?id=aaaa&num=hbdvh').subscribe({
       next: res => console.log(res),
-      error: e => console.log(e)
+      error: e => this.validationErrors = e
     });
   }
 
