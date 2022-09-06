@@ -13,6 +13,8 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { TestErrorComponent } from './_shared/components/test-error/test-error.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,10 +31,12 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    SharedModule
+    SharedModule,
+    NgxSpinnerModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
