@@ -1,76 +1,78 @@
-<div id="aside_filter" class="collapse card d-lg-block mb-5">
+<div id="aside_filter" class="collapse card d-lg-block mb-5" *ngIf="categories && brands">
+    <ng-container>
 
-    <article class="filter-group">
-        <header class="card-header">
-            <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside1" aria-expanded="true">
-                <i class="icon-control fa fa-chevron-down"></i> Categories
-            </a>
-        </header>
-        <div class="collapse show " id="collapse_aside1">
-            <div class="card-body p-2">
-                <div class="list-group rounded-0">
-                    <a *ngFor="let category of categories" (click)="onCategoryChange(category.id)" class="list-group-item list-group-item-action rounded-1 border-0" [class.active]="category.id === filterParams.category">
+        <article class="filter-group">
+            <header class="card-header">
+                <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside1" aria-expanded="true">
+                    <i class="icon-control fa fa-chevron-down"></i> Categories
+                </a>
+            </header>
+            <div class="collapse show " id="collapse_aside1">
+                <div class="card-body p-2">
+                    <div class="list-group rounded-0">
+                        <a *ngFor="let category of categories" (click)="onCategoryChange(category.id)" class="list-group-item list-group-item-action rounded-1 border-0" [class.active]="category.id === filterParams.category">
                         {{category.name}}</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </article>
+        </article>
 
-    <article class="filter-group">
-        <header class="card-header">
-            <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside_brands">
-                <i class="icon-control fa fa-chevron-down"></i> Brands
-            </a>
-        </header>
-        <div class="collapse show" id="collapse_aside_brands">
-            <div class="card-body">
+        <article class="filter-group">
+            <header class="card-header">
+                <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside_brands">
+                    <i class="icon-control fa fa-chevron-down"></i> Brands
+                </a>
+            </header>
+            <div class="collapse show" id="collapse_aside_brands">
+                <div class="card-body">
 
-                <label *ngFor="let brand of brands" class="form-check mb-2">
+                    <label *ngFor="let brand of brands" class="form-check mb-2">
                     <input class="form-check-input" type="checkbox" value="{{brand.id}}" (click)="onBrandClick($event.target)">
                     <span class="form-check-label link-label"> {{brand.name}} </span>
                     <b class="badge rounded-pill bg-gray-dark float-end">{{120}}</b>
                 </label>
+                </div>
             </div>
-        </div>
-    </article>
+        </article>
 
-    <article class="filter-group">
-        <header class="card-header">
-            <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside2">
-                <i class="icon-control fa fa-chevron-down"></i> Price
-            </a>
-        </header>
-        <div class="collapse show" id="collapse_aside2">
-            <div class="card-body">
-                <input type="range" class="form-range" min="0" max="100">
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <label for="min" class="form-label">Min</label>
-                        <input class="form-control form-control-sm" id="min" placeholder="$0" type="number">
-                    </div>
+        <article class="filter-group">
+            <header class="card-header">
+                <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside2">
+                    <i class="icon-control fa fa-chevron-down"></i> Price
+                </a>
+            </header>
+            <div class="collapse show" id="collapse_aside2">
+                <div class="card-body">
+                    <input type="range" class="form-range" min="0" max="100">
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <label for="min" class="form-label">Min</label>
+                            <input class="form-control form-control-sm" id="min" placeholder="$0" type="number">
+                        </div>
 
-                    <div class="col-6">
-                        <label for="max" class="form-label">Max</label>
-                        <input class="form-control form-control-sm" id="max" placeholder="$1,0000" type="number">
+                        <div class="col-6">
+                            <label for="max" class="form-label">Max</label>
+                            <input class="form-control form-control-sm" id="max" placeholder="$1,0000" type="number">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </article>
-    <article class="filter-group">
-        <header class="card-header">
-            <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside3">
-                <i class="icon-control fa fa-chevron-down"></i> Search
-            </a>
-        </header>
-        <div class="collapse show" id="collapse_aside3">
-            <div class="card-body">
-                <input type="search" [(ngModel)]="filterParams.searchValue" class="form-control form-control-sm my-2" placeholder="Search..." aria-label="Search">
+        </article>
+        <article class="filter-group">
+            <header class="card-header">
+                <a class="text-dark text text-decoration-none fw-bold" data-bs-toggle="collapse" data-bs-target="#collapse_aside3">
+                    <i class="icon-control fa fa-chevron-down"></i> Search
+                </a>
+            </header>
+            <div class="collapse show" id="collapse_aside3">
+                <div class="card-body">
+                    <input type="search" [(ngModel)]="filterParams.searchValue" class="form-control form-control-sm my-2" placeholder="Search..." aria-label="Search">
+                </div>
             </div>
-        </div>
-        <header class="card-header">
-            <button (click)="applyFilters()" class="btn btn-primary btn-sm w-100 my-2">Apply</button>
-            <button (click)="resetFilters()" class="btn btn-warning btn-sm w-100 mb-2">Reset</button>
-        </header>
-    </article>
+            <header class="card-header">
+                <button (click)="applyFilters()" class="btn btn-primary btn-sm w-100 my-2">Apply</button>
+                <button (click)="resetFilters()" class="btn btn-warning btn-sm w-100 mb-2">Reset</button>
+            </header>
+        </article>
+    </ng-container>
 </div>

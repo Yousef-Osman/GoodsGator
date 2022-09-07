@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { AppToastService } from '../_shared/services/app-toast.service';
+import { AppToastService } from '../services/app-toast.service';
 import { BootstrapClass } from '../_shared/enums/bootstrap-class';
 
 @Injectable()

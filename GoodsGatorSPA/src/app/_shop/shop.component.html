@@ -14,7 +14,7 @@
                     </app-pagination-header>
 
                     <div class="ms-auto">
-                        <select class="form-select form-select-sm d-inline-block w-auto" (change)="sortProducts($event.target.value)">
+                        <select class="form-select form-select-sm d-inline-block w-auto" (change)="sortProducts($event.target.value)" *ngIf="products">
                             <option *ngFor="let option of sortOptions" value="{{option.value}}">{{option.displayName}}
                             </option>
                         </select>

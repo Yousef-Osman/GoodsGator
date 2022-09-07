@@ -12,10 +12,11 @@ export class BusyService {
   busy() {
     this.requestCount++;
     this.spinnerService.show(undefined, {
-      type: 'ball-spin-clockwise',
-      bdColor: 'rgba(255,255,255,0.7)',
+      type: 'ball-scale-multiple',
+      bdColor: 'rgba(255,255,255,0.2)',
       color: '#333333',
-      size: 'medium'
+      size: 'medium',
+      fullScreen: true
     });
   }
 
