@@ -16,13 +16,14 @@ public class BasketRepository : IBasketRepository
 
     public async Task<Basket> GetAsync(string basketId)
     {
-        var basketString = await _database.StringGetAsync(basketId);
-        return string.IsNullOrEmpty(basketString) ? null : JsonSerializer.Deserialize<Basket>(basketString);
+        var basketData = await _database.StringGetAsync(basketId);
+         var basket = basketData.IsNullOrEmpty ? null : JsonSerializer.Deserialize<Basket>(basketData);
+        return basket;
     }
 
     public async Task<Basket> AddOrUpdateAsync(Basket basket)
     {
-        var changed = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket.Items), TimeSpan.FromDays(30));
+        var changed = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket), TimeSpan.FromDays(30));
 
         return !changed ? null : await GetAsync(basket.Id);
     }
