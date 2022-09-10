@@ -6,6 +6,6 @@
             <p class="title mb-1" [routerLink]="['/products', product.id]"> {{product.name}}</p>
             <p class="price-text mb-0">{{product.price | currency:'EGP ':'symbol':'1.0-2'}}</p>
         </div>
-        <fa-icon class="btn btn-outline-primary btn-sm" [icon]="['fas', 'cart-shopping']"></fa-icon>
+        <fa-icon class="btn btn-outline-primary btn-sm" [icon]="['fas', 'cart-shopping']" (click)="addItemToBasket()"></fa-icon>
     </div>
 </div>

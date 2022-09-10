@@ -1,7 +1,7 @@
 import { BasketItem, IBasket } from "../interfaces/basket";
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 
 export class Basket implements IBasket {
-  id: string = uuid();
+  id: string = uuidv4();
   items: BasketItem[] = [];
 }

@@ -17,7 +17,7 @@ export class BasketService {
   constructor(private http: HttpClient) { }
 
   getBasket(id: string) {
-    return this.http.get(this.baseUrl + 'basket?basketid=' + id).pipe(
+    return this.http.get(this.baseUrl + 'basket?id=' + id).pipe(
       map((basket: IBasket) => {
         this.basketSource.next(basket)
       })
@@ -35,7 +35,7 @@ export class BasketService {
     return this.basketSource.value;
   }
 
-  addItemsToBasket(product: Product, quantity: number = 1) {
+  addItemToBasket(product: Product, quantity: number = 1) {
     const item: BasketItem = this.mapProductToItem(product, quantity);
     const basket: IBasket = this.getCurrentBasketValue() ?? this.createBasket();
     basket.items = this.AddOrUpdateItem(basket.items, item);

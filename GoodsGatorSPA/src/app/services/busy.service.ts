@@ -15,8 +15,7 @@ export class BusyService {
       type: 'ball-scale-multiple',
       bdColor: 'rgba(255,255,255,0.2)',
       color: '#333333',
-      size: 'medium',
-      fullScreen: true
+      size: 'medium'
     });
   }
 
