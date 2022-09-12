@@ -18,18 +18,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="ms-auto navbar-nav mb-2 mb-lg-0">
                 <li>
-                    <a routerLink="/products" class="nav-link nav-option text-white text-center py-0 my-0">
+                    <a routerLink="/products" class="nav-link nav-option text-uppercase text-white text-center py-0 my-0">
                         <i class="bi bi-grid-fill"></i> Shop
                     </a>
                 </li>
                 <li>
-                    <a routerLink="/basket" class="nav-link nav-option text-white position-relative text-center py-0 my-0 mx-2">
+                    <a routerLink="/basket" class="nav-link nav-option text-uppercase text-white position-relative text-center py-0 my-0 mx-2">
                         <fa-icon [icon]="['fas', 'cart-shopping']"></fa-icon> Orders
                         <div *ngIf="(basket$ | async) as basket" class="cart-no">{{basket.items.length}}</div>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link nav-option text-white text-center py-0 my-0">
+                    <a href="#" class="nav-link nav-option text-uppercase text-white text-center py-0 my-0">
                         <i class="bi bi-person-circle"></i> Sign in
                     </a>
                 </li>

@@ -41,7 +41,7 @@ export class BasketService {
     basket.items = this.AddOrUpdateItem(basket.items, item);
     this.setBasket(basket);
   }
-  AddOrUpdateItem(items: BasketItem[], item: BasketItem): BasketItem[] {
+  private AddOrUpdateItem(items: BasketItem[], item: BasketItem): BasketItem[] {
     const index = items.findIndex(i => i.id === item.id);
 
     if (index === -1) {
@@ -53,7 +53,7 @@ export class BasketService {
     return items;
   }
 
-  createBasket(): IBasket {
+  private createBasket(): IBasket {
     const basket = new Basket();
     localStorage.setItem('basket_id', basket.id);
     return basket;
