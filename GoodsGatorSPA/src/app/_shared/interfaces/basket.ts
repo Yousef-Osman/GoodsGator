@@ -1,9 +1,9 @@
-export interface IBasket {
+export interface IShoppingCart {
   id: string;
-  items: BasketItem[];
+  items: ICartItem[];
 }
 
-export interface BasketItem {
+export interface ICartItem {
   id: string;
   productName: string;
   price: number;
@@ -11,4 +11,10 @@ export interface BasketItem {
   imageUrl: string;
   category: string;
   brand: string;
+}
+
+export interface ICartSummary {
+  shipping: number;
+  subTotal: number;
+  total: number;
 }

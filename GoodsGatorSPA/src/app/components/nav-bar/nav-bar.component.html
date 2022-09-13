@@ -25,7 +25,7 @@
                 <li>
                     <a routerLink="/basket" class="nav-link nav-option text-uppercase text-white position-relative text-center py-0 my-0 mx-2">
                         <fa-icon [icon]="['fas', 'cart-shopping']"></fa-icon> Orders
-                        <div *ngIf="(basket$ | async) as basket" class="cart-no">{{basket.items.length}}</div>
+                        <div *ngIf="(cart$ | async) as cart" class="cart-no">{{cart.items.length}}</div>
                     </a>
                 </li>
                 <li>

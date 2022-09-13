@@ -7,7 +7,7 @@
 
             <div class="row m-0 shadow">
 
-              <div *ngIf="(basket$ | async) as basket" class="col-lg-8 p-5">
+              <div *ngIf="(cart$ | async) as basket" class="col-lg-8 p-5">
 
 
                 <div class="d-flex justify-content-between align-items-center">
@@ -48,18 +48,18 @@
                   </div>
               </div>
               <div class="col-lg-4 bg-grey">
-                <div class="p-5">
+                <div *ngIf="(cartSummary$ | async) as cartSummary" class="p-5">
                   <h3 class="fw-bold text-muted">Summary</h3>
                   <hr class="my-4">
 
                   <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-muted">Items 3</h5>
-                    <h5>€ 132.00</h5>
+                    <h5 class="text-muted">SubTotal</h5>
+                    <h5>{{cartSummary.subTotal | currency:'EGP ':'symbol':'1.0-2'}}</h5>
                   </div>
 
                   <div class="d-flex justify-content-between mb-4">
                     <h5 class="text-muted">Shipping</h5>
-                    <h5>€ 20.00</h5>
+                    <h5>{{cartSummary.shipping | currency:'EGP ':'symbol':'1.0-2'}}</h5>
                   </div>
 
                   <hr class="my-4">
@@ -72,7 +72,7 @@
 
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="text-uppercase">Total price</h5>
-                    <h5>€ 137.00</h5>
+                    <h5>{{cartSummary.total | currency:'EGP ':'symbol':'1.0-2'}}</h5>
                   </div>
 
                   <button type="button" class="btn btn-dark btn-block col-12 shadow-sm"

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faTrashCan as fasTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
-import { IBasket } from '../_shared/interfaces/basket';
+import { IShoppingCart, ICartSummary } from '../_shared/interfaces/basket';
 import { BasketService } from './basket.service';
 
 @Component({
@@ -11,14 +11,16 @@ import { BasketService } from './basket.service';
   styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent implements OnInit {
-  basket$: Observable<IBasket>;
+  cart$: Observable<IShoppingCart>;
+  cartSummary$: Observable<ICartSummary>;
 
   constructor(library: FaIconLibrary, private basketService: BasketService) {
     library.addIcons(fasTrashCan);
   }
 
   ngOnInit(): void {
-    this.basket$ = this.basketService.basket$
+    this.cart$ = this.basketService.cart$
+    this.cartSummary$ = this.basketService.cartSummary$
   }
 
   addToCart(){
