@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li>
-                    <a routerLink="/basket" class="nav-link nav-option text-uppercase text-white position-relative text-center py-0 my-0 mx-2">
+                    <a routerLink="/cart" class="nav-link nav-option text-uppercase text-white position-relative text-center py-0 my-0 mx-2">
                         <fa-icon [icon]="['fas', 'cart-shopping']"></fa-icon> Orders
                         <div *ngIf="(cart$ | async) as cart" class="cart-no">{{cart.items.length}}</div>
                     </a>

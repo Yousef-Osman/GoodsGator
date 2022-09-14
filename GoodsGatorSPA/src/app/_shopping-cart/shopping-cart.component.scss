@@ -2,14 +2,14 @@
     background-color: #eae8e8;
 }
 
-.hide-overflow{
+.hide-overflow {
     width: 250px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.hide-overflow:hover{
+.hide-overflow:hover {
     white-space: normal;
     overflow: inherit;
     text-overflow: inherit;
@@ -17,6 +17,7 @@
 
 
 /* skin 2 */
+
 .skin-2 .num-in {
     background: #FFFFFF;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
@@ -58,19 +59,19 @@
     cursor: pointer;
 }
 
-.plus:hover{
+.plus:hover {
     background-color: #f1eeff;
 }
 
-.plus:active{
+.plus:active {
     background-color: #c9bfff;
 }
 
-.minus:hover{
+.minus:hover {
     background-color: #ffe8e8;
 }
 
-.minus:active{
+.minus:active {
     background-color: #ffc8c8;
 }
 
@@ -81,5 +82,6 @@
     border: none;
     text-align: center;
 }
+
 
 /* / skin 2 */

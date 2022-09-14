@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BasketService } from './_basket/basket.service';
+import { ShoppingCartService } from './_shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +9,16 @@ import { BasketService } from './_basket/basket.service';
 export class AppComponent implements OnInit {
   title = 'GoodsGatorSPA';
 
-  constructor(private basketService: BasketService) { }
+  constructor(private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit(): void {
-    this.loadBasket();
+    this.loadShoppingCart();
   }
 
-  loadBasket() {
-    const basketId = localStorage.getItem('basket_id');
-    if (basketId) {
-      this.basketService.getBasket(basketId).subscribe();
+  loadShoppingCart() {
+    const cartId = localStorage.getItem('cart_id');
+    if (cartId) {
+      this.shoppingCartService.getShoppingCart(cartId).subscribe();
     }
   }
 
