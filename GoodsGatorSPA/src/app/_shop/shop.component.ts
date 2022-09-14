@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ShopService } from './shop.service';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlass as fasMagnifyingGlass, faArrowRotateLeft as fasArrowRotateLeft } from '@fortawesome/free-solid-svg-icons';
-import { Product } from '../_shared/interfaces/product';
-import { Pagination } from '../_shared/interfaces/pagination';
+import { IProduct } from '../_shared/interfaces/iProduct';
+import { IPagination } from '../_shared/interfaces/iPagination';
 import { ProductParams } from '../_shared/models/product-params';
 
 @Component({
@@ -13,8 +13,8 @@ import { ProductParams } from '../_shared/models/product-params';
 })
 export class ShopComponent implements OnInit {
 
-  products: Product[];
-  pagination: Pagination;
+  products: IProduct[];
+  pagination: IPagination;
   productParams = new ProductParams();
   sortOptions = [
     { value: "", displayName: "Date: Latest First" },

@@ -1,6 +1,6 @@
-import { Pagination } from "../interfaces/pagination"
+import { IPagination } from "../interfaces/iPagination"
 
 export class PaginatedResponse<T> {
   body: T;
-  pagination: Pagination;
+  pagination: IPagination;
 }

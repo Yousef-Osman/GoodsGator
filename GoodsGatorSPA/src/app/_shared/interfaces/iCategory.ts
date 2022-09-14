@@ -1,4 +1,4 @@
-export interface Brand {
+export interface ICategory {
   id: number;
   name: string;
   createdOn: Date;

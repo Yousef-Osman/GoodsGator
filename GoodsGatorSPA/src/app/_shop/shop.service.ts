@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs';
-import { Product } from '../_shared/interfaces/product';
-import { Brand } from '../_shared/interfaces/brand';
-import { Category } from '../_shared/interfaces/category';
+import { IProduct } from '../_shared/interfaces/iProduct';
+import { IBrand } from '../_shared/interfaces/iBrand';
+import { ICategory } from '../_shared/interfaces/iCategory';
 import { ProductParams } from '../_shared/models/product-params';
 import { PaginatedResponse } from '../_shared/models/paginated-response';
 
@@ -13,14 +13,14 @@ import { PaginatedResponse } from '../_shared/models/paginated-response';
 })
 export class ShopService {
   baseUrl: string = environment.apiUrl;
-  paginatedResponse = new PaginatedResponse<Product[]>();
+  paginatedResponse = new PaginatedResponse<IProduct[]>();
 
   constructor(private http: HttpClient) { }
 
   getProducts(productParams: ProductParams) {
     let params = this.setQueryParames(productParams);
 
-    return this.http.get<Product[]>(this.baseUrl + "products", { observe: 'response', params })
+    return this.http.get<IProduct[]>(this.baseUrl + "products", { observe: 'response', params })
       .pipe(
         map(response => {
           this.paginatedResponse.body = response.body;
@@ -35,15 +35,15 @@ export class ShopService {
   }
 
   getProduct(id:string) {
-    return this.http.get<Product>(this.baseUrl + "products/" + id);
+    return this.http.get<IProduct>(this.baseUrl + "products/" + id);
   }
 
   getBrands() {
-    return this.http.get<Brand[]>(this.baseUrl + "products/brands");
+    return this.http.get<IBrand[]>(this.baseUrl + "products/brands");
   }
 
   getCategories() {
-    return this.http.get<Category[]>(this.baseUrl + "products/Categories");
+    return this.http.get<ICategory[]>(this.baseUrl + "products/Categories");
   }
 
   setQueryParames(productParams: ProductParams): HttpParams {

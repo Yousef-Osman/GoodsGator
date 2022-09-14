@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from 'src/app/_shared/interfaces/product';
+import { IProduct } from 'src/app/_shared/interfaces/iProduct';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCartShopping as fasCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { ShoppingCartService } from 'src/app/_shopping-cart/shopping-cart.service';
@@ -11,7 +11,7 @@ import { ShoppingCartService } from 'src/app/_shopping-cart/shopping-cart.servic
 })
 export class ProductItemComponent implements OnInit {
 
-  @Input() product: Product;
+  @Input() product: IProduct;
   
   constructor(library: FaIconLibrary, private shoppingCartService: ShoppingCartService) {
     library.addIcons(fasCartShopping);

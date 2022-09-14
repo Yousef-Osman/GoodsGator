@@ -1,4 +1,4 @@
-export interface ToastInfo {
+export interface IToastInfo {
   header?: string;
   body: string;
   delay?: number;

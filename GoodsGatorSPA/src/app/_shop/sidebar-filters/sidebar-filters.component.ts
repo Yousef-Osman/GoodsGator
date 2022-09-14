@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Brand } from 'src/app/_shared/interfaces/brand';
-import { Category } from 'src/app/_shared/interfaces/category';
+import { IBrand } from 'src/app/_shared/interfaces/iBrand';
+import { ICategory } from 'src/app/_shared/interfaces/iCategory';
 import { ProductParams } from 'src/app/_shared/models/product-params';
 import { ShopService } from '../shop.service';
 
@@ -11,8 +11,8 @@ import { ShopService } from '../shop.service';
 })
 export class SidebarFiltersComponent implements OnInit {
 
-  brands: Brand[];
-  categories: Category[];
+  brands: IBrand[];
+  categories: ICategory[];
   filterParams = new ProductParams();
   @Output() filters = new EventEmitter<ProductParams>;
 

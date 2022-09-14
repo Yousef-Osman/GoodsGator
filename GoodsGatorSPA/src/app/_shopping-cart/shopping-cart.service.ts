@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ICartItem, ICartSummary, IShoppingCart } from '../_shared/interfaces/IShoppingCart';
-import { Product } from '../_shared/interfaces/product';
+import { ICartItem, ICartSummary, IShoppingCart } from '../_shared/interfaces/iShoppingCart';
+import { IProduct } from '../_shared/interfaces/iProduct';
 import { ShoppingCart } from '../_shared/models/shoppingCart';
 
 @Injectable({
@@ -50,7 +50,7 @@ export class ShoppingCartService {
     this.cartSummarySource.next({ shipping, subTotal, total });
   }
 
-  addItemToCart(product: Product, quantity: number = 1) {
+  addItemToCart(product: IProduct, quantity: number = 1) {
     const item: ICartItem = this.mapProductToItem(product, quantity);
     const cart: IShoppingCart = this.getCurrentCartValue() ?? this.createShoppingCart();
     cart.items = this.AddOrUpdateItem(cart.items, item);
@@ -74,7 +74,7 @@ export class ShoppingCartService {
     return shoppingCart;
   }
 
-  private mapProductToItem(product: Product, quantity: number): ICartItem {
+  private mapProductToItem(product: IProduct, quantity: number): ICartItem {
     return {
       id: product.id,
       productName: product.name,

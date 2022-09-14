@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { ToastInfo } from '../_shared/interfaces/toast-info';
+import { IToastInfo } from '../_shared/interfaces/iToast-info';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppToastService {
-  toasts: ToastInfo[] = [];
+  toasts: IToastInfo[] = [];
 
   constructor() { }
 
-  show(options: ToastInfo) {
+  show(options: IToastInfo) {
     this.toasts.push({ ...options });
   }
 
-  remove(toast: ToastInfo) {
+  remove(toast: IToastInfo) {
     this.toasts = this.toasts.filter(t => t != toast);
   }
 
