@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "feb2c7b6-8ba6-4771-a5bb-9a19ac09b37a",
+		"name": "GoodsGator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13929417"
+	},
+	"item": [
+		{
+			"name": "Error Handling",
+			"item": [
+				{
+					"name": "Error NotFound",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/ErrorTesting/NotFound/5",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"ErrorTesting",
+								"NotFound",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error BadRequest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/ErrorTesting/BadRequest",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"ErrorTesting",
+								"BadRequest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error ValidationRequest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/ErrorTesting/ValidationRequest?id=aaaa&num=hbdvh",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"ErrorTesting",
+								"ValidationRequest"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "aaaa"
+								},
+								{
+									"key": "num",
+									"value": "hbdvh"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error InternalError",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/ErrorTesting/InternalError",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"ErrorTesting",
+								"InternalError"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Error NotFound Endpoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/ErrorTesting/NotFoundEndpoint",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"ErrorTesting",
+								"NotFoundEndpoint"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shopping Cart",
+			"item": [
+				{
+					"name": "Get Shopping Cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/shoppingCart?id=cart1",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"shoppingCart"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "cart1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add or Update Shopping Cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"cart1\",\r\n    \"items\": [\r\n        {\r\n            \"id\": 5,\r\n            \"productName\": \"Dell Inspiron 15-3593 Laptop\",\r\n            \"price\": 10500,\r\n            \"quantity\":2,\r\n            \"imageUrl\": \"https://localhost:40404/images/products/laptop/DellInspiron15-3593Laptop.jpg\",\r\n            \"category\": \"laptop\",\r\n            \"brand\": \"dell\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/basket",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"basket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Shopping Cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/basket?id=basket1",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"basket"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "basket1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Products",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{apiBaseUrl}}/api/products?PageNumber=1&pageSize=4&Category=2&OrderBy=PriceDesc&Brands=2&Brands=3",
+					"host": [
+						"{{apiBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"products"
+					],
+					"query": [
+						{
+							"key": "PageNumber",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "4"
+						},
+						{
+							"key": "SearchValue",
+							"value": "ideapad",
+							"disabled": true
+						},
+						{
+							"key": "Category",
+							"value": "2"
+						},
+						{
+							"key": "OrderBy",
+							"value": "PriceDesc"
+						},
+						{
+							"key": "Brands",
+							"value": "2"
+						},
+						{
+							"key": "Brands",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiBaseUrl}}/api/products/c509bbd3-53cb-46a0-9630-873ff7786aa2",
+					"host": [
+						"{{apiBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"c509bbd3-53cb-46a0-9630-873ff7786aa2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product Brands",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiBaseUrl}}/api/products/brands",
+					"host": [
+						"{{apiBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"brands"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product Brand",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiBaseUrl}}/api/products/brands/2",
+					"host": [
+						"{{apiBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"brands",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiBaseUrl}}/api/products/Categories",
+					"host": [
+						"{{apiBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"Categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{apiBaseUrl}}/api/products/Categories/2",
+					"host": [
+						"{{apiBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"Categories",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
