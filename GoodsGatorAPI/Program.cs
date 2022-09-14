@@ -45,7 +45,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", policy => policy

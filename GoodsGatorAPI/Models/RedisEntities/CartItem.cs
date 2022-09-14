@@ -1,6 +1,6 @@
 ﻿namespace GoodsGatorAPI.Models.RedisEntities;
 
-public class BasketItem
+public class CartItem
 {
     public string Id { get; set; }
     public string ProductName { get; set; }
