@@ -31,16 +31,16 @@
                                                 <div class="me-5">
                                                     <div class="num-block skin-2">
                                                         <div class="num-in">
-                                                            <span class="minus control-hover"></span>
+                                                            <span (click)="decrementQuantity(item.id)" class="minus control-hover"></span>
                                                             <input type="text" class="in-num" value="{{item.quantity}}">
-                                                            <span (click)="addToCart()" class="plus control-hover"></span>
+                                                            <span (click)="incrementQuantity(item.id)" class="plus control-hover"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="me-5" style="width: 100px;">
                                                     <h6 class="mb-0">{{item.price | currency:'EGP ':'symbol':'1.0-2'}}</h6>
                                                 </div>
-                                                <fa-icon class="text-danger me-2 curser-pointer" [icon]="['fas', 'trash-can']"></fa-icon>
+                                                <fa-icon (click)="removeItem(item.id)" class="text-danger me-2 curser-pointer" [icon]="['fas', 'trash-can']"></fa-icon>
                                             </div>
                                         </div>
                                     </div>

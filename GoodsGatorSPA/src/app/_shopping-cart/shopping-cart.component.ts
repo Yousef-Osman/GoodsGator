@@ -24,6 +24,16 @@ export class ShoppingCartComponent implements OnInit {
     this.cartSummary$ = this.shoppingCartService.cartSummary$
   }
 
-  addToCart(){ }
+  incrementQuantity(id: string) {
+    this.shoppingCartService.incrementItemQuantity(id);
+  }
+
+  decrementQuantity(id: string) {
+    this.shoppingCartService.decrementItemQuantity(id);
+  }
+
+  removeItem(id: string) {
+    this.shoppingCartService.removeCartItem(id);
+  }
 
 }

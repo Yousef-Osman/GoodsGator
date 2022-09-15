@@ -12,26 +12,27 @@ import { ShoppingCart } from '../_shared/models/shoppingCart';
 export class ShoppingCartService {
 
   baseUrl: string = environment.apiUrl;
-  private shoppingCart = new BehaviorSubject<IShoppingCart>(null);
-  cart$ = this.shoppingCart.asObservable();
+  apiUrl: string = this.baseUrl + 'shoppingCart';
+  private shoppingCartSource = new BehaviorSubject<IShoppingCart>(null);
+  cart$ = this.shoppingCartSource.asObservable();
   private cartSummarySource = new BehaviorSubject<ICartSummary>(null);
   cartSummary$ = this.cartSummarySource.asObservable();
 
   constructor(private http: HttpClient) { }
 
   getShoppingCart(id: string) {
-    return this.http.get(this.baseUrl + 'shoppingCart?id=' + id).pipe(
+    return this.http.get(this.apiUrl + '?id=' + id).pipe(
       map((cart: IShoppingCart) => {
-        this.shoppingCart.next(cart);
+        this.shoppingCartSource.next(cart);
         this.getCatTotal();
       })
     )
   }
 
   setShoppingCart(cart: IShoppingCart) {
-    return this.http.post(this.baseUrl + 'shoppingCart', cart).subscribe({
+    return this.http.post(this.apiUrl, cart).subscribe({
       next: (cart: IShoppingCart) => {
-        this.shoppingCart.next(cart);
+        this.shoppingCartSource.next(cart);
         this.getCatTotal();
       },
       error: e => console.log(e)
@@ -39,7 +40,7 @@ export class ShoppingCartService {
   }
 
   getCurrentCartValue() {
-    return this.shoppingCart.value;
+    return this.shoppingCartSource.value;
   }
 
   getCatTotal() {
@@ -48,6 +49,44 @@ export class ShoppingCartService {
     const subTotal = items.reduce((result, item) => (item.price * item.quantity) + result, 0);
     const total = shipping + subTotal;
     this.cartSummarySource.next({ shipping, subTotal, total });
+  }
+
+  incrementItemQuantity(id: string) {
+    const cart = this.getCurrentCartValue();
+    const index = cart.items.findIndex(item => item.id === id);
+    cart.items[index].quantity++;
+    this.setShoppingCart(cart);
+  }
+
+  decrementItemQuantity(id: string) {
+    const cart = this.getCurrentCartValue();
+    const index = cart.items.findIndex(item => item.id === id);
+    if (cart.items[index].quantity > 1) {
+      cart.items[index].quantity--;
+      this.setShoppingCart(cart);
+    } else {
+      this.removeCartItem(id);
+    }
+  }
+  removeCartItem(id: string, itemIndex: number = -1) {
+    const cart = this.getCurrentCartValue();
+    cart.items = cart.items.filter(item => item.id !== id);
+
+    if (cart.items.length > 0)
+      this.setShoppingCart(cart);
+    else
+      this.deleteShoppingCart(id);
+  }
+
+  deleteShoppingCart(id: string) {
+    this.http.delete(this.apiUrl + '?id=' + id).subscribe({
+      next: () => {
+        this.shoppingCartSource.next(null);
+        this.cartSummarySource.next(null);
+        localStorage.removeItem('cart_id');
+      },
+      error: e => console.log(e)
+    });
   }
 
   addItemToCart(product: IProduct, quantity: number = 1) {
