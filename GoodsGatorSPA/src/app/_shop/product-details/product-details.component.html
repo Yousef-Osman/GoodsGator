@@ -21,13 +21,20 @@
                 <hr>
                 <div class="mb-4 h5">{{product.price | currency:'EGP ': 'symbol':'1.0-2'}}</div>
                 <div class="row gx-2 mb-4">
-                    <div class="col-2"> <select class="form-select">
-                            <option> 1 </option>
-                            <option> 2 </option>
-                            <option> 3 </option>
-                        </select> </div>
-                    <div class="col-auto">
-                        <fa-icon class="btn btn-primary" [icon]="['fas', 'cart-shopping']"></fa-icon>
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="me-4">
+                            <div class="num-block skin-2">
+                                <div class="num-in">
+                                    <span (click)="decrementQuantity(product.id)" class="minus control-hover"></span>
+                                    <input type="text" class="in-num" value="{{quantity}}">
+                                    <span (click)="incrementQuantity(product.id)" class="plus control-hover"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <fa-icon (click)="addItemToCart()" class="btn btn-primary me-1 btn-sm" [icon]="['fas', 'cart-shopping']"></fa-icon>
+                            <fa-icon (click)="removeItem(product.id)" class="btn btn-danger btn-sm" [icon]="['fas', 'trash-can']"></fa-icon>
+                        </div>
                     </div>
                 </div>
                 <div>

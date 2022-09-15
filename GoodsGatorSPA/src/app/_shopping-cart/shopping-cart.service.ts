@@ -24,7 +24,7 @@ export class ShoppingCartService {
     return this.http.get(this.apiUrl + '?id=' + id).pipe(
       map((cart: IShoppingCart) => {
         this.shoppingCartSource.next(cart);
-        this.getCatTotal();
+        this.getCartTotal();
       })
     )
   }
@@ -33,7 +33,7 @@ export class ShoppingCartService {
     return this.http.post(this.apiUrl, cart).subscribe({
       next: (cart: IShoppingCart) => {
         this.shoppingCartSource.next(cart);
-        this.getCatTotal();
+        this.getCartTotal();
       },
       error: e => console.log(e)
     });
@@ -43,7 +43,7 @@ export class ShoppingCartService {
     return this.shoppingCartSource.value;
   }
 
-  getCatTotal() {
+  getCartTotal() {
     const shipping = 50;
     const items = this.getCurrentCartValue().items;
     const subTotal = items.reduce((result, item) => (item.price * item.quantity) + result, 0);
@@ -68,6 +68,7 @@ export class ShoppingCartService {
       this.removeCartItem(id);
     }
   }
+  
   removeCartItem(id: string, itemIndex: number = -1) {
     const cart = this.getCurrentCartValue();
     cart.items = cart.items.filter(item => item.id !== id);
@@ -95,6 +96,16 @@ export class ShoppingCartService {
     cart.items = this.AddOrUpdateItem(cart.items, item);
     this.setShoppingCart(cart);
   }
+
+  getItemQuantity(id: string): number {
+    const cart = this.getCurrentCartValue();
+    const exist = cart?.items.some(item => item.id === id);
+    if (!exist) return 0;
+
+    const index = cart.items.findIndex(item => item.id === id);
+    return cart.items[index].quantity;
+  }
+
   private AddOrUpdateItem(items: ICartItem[], item: ICartItem): ICartItem[] {
     const index = items.findIndex(i => i.id === item.id);
 
