@@ -42,26 +42,18 @@ export class ProductDetailsComponent implements OnInit {
     this.router.navigate(['/products']);
   }
 
-  addItemToCart(){
-    this.shoppingCartService.addItemToCart(this.product);
-    this.controlItemInCart(this.product.id);
-  }
-
   incrementQuantity(id: string) {
-    if (this.quantity > 0){
-      this.shoppingCartService.incrementItemQuantity(id);
-    }else{
-      this.shoppingCartService.addItemToCart(this.product);
-    }
-
-    this.controlItemInCart(id);
+    this.quantity++;
   }
 
   decrementQuantity(id: string) {
     if(this.quantity > 0){
-      this.shoppingCartService.decrementItemQuantity(id);
-      this.controlItemInCart(id);
+      this.quantity--;
     }
+  }
+
+  addItemToCart(){
+    this.shoppingCartService.addItemToCart(this.product, this.quantity);
   }
 
   removeItem(id: string) {

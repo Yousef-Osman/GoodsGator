@@ -112,7 +112,7 @@ export class ShoppingCartService {
     if (index === -1) {
       items.push(item);
     } else {
-      items[index].quantity += item.quantity;
+      items[index].quantity = item.quantity;
     }
 
     return items;
