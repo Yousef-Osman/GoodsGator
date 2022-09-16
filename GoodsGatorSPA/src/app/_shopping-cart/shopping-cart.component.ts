@@ -20,8 +20,8 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cart$ = this.shoppingCartService.cart$
-    this.cartSummary$ = this.shoppingCartService.cartSummary$
+    this.cart$ = this.shoppingCartService.cart$;
+    this.cartSummary$ = this.shoppingCartService.cartSummary$;
   }
 
   incrementQuantity(id: string) {

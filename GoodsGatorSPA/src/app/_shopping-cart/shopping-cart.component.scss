@@ -15,7 +15,6 @@
     text-overflow: inherit;
 }
 
-
 /* skin 2 */
 
 .skin-2 .num-in {
@@ -85,3 +84,7 @@
 
 
 /* / skin 2 */
+
+.remove-border:focus{
+    outline: none;
+}

@@ -20,10 +20,10 @@
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex flex-row align-items-center">
                                                 <div>
-                                                    <img src="{{item.imageUrl}}" class="img-fluid curser-pointer rounded-3" alt="Shopping item" style="width: 65px;">
+                                                    <img [routerLink]="['/products', item.id]" src="{{item.imageUrl}}" class="img-fluid curser-pointer rounded-3" alt="Shopping item" style="width: 65px;">
                                                 </div>
                                                 <div class="ms-3">
-                                                    <h6 class="curser-pointer hide-overflow">{{item.productName}}</h6>
+                                                    <h6 [routerLink]="['/products', item.id]" class="curser-pointer hide-overflow">{{item.productName}}</h6>
                                                     <p class="small mb-0">{{item.category}}, {{item.brand}}</p>
                                                 </div>
                                             </div>
@@ -32,7 +32,7 @@
                                                     <div class="num-block skin-2">
                                                         <div class="num-in">
                                                             <span (click)="decrementQuantity(item.id)" class="minus control-hover"></span>
-                                                            <input type="text" class="in-num" value="{{item.quantity}}">
+                                                            <input type="text" class="in-num remove-border" value="{{item.quantity}}" readonly>
                                                             <span (click)="incrementQuantity(item.id)" class="plus control-hover"></span>
                                                         </div>
                                                     </div>

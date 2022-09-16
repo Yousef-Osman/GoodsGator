@@ -39,7 +39,19 @@ export class ShoppingCartService {
     });
   }
 
-  getCurrentCartValue() {
+  loadShoppingCart(): IShoppingCart {
+    const cartId = localStorage.getItem('cart_id');
+    let cart: IShoppingCart = null;
+
+    if (cartId) {
+      this.getShoppingCart(cartId).subscribe();
+      cart = this.getCurrentCartValue();
+    }
+
+    return cart ?? this.createShoppingCart();
+  }
+
+  getCurrentCartValue(): IShoppingCart {
     return this.shoppingCartSource.value;
   }
 
@@ -68,7 +80,7 @@ export class ShoppingCartService {
       this.removeCartItem(id);
     }
   }
-  
+
   removeCartItem(id: string, itemIndex: number = -1) {
     const cart = this.getCurrentCartValue();
     cart.items = cart.items.filter(item => item.id !== id);
@@ -92,18 +104,22 @@ export class ShoppingCartService {
 
   addItemToCart(product: IProduct, quantity: number = 1) {
     const item: ICartItem = this.mapProductToItem(product, quantity);
-    const cart: IShoppingCart = this.getCurrentCartValue() ?? this.createShoppingCart();
+    const cart = this.getCurrentCartValue() ?? this.createShoppingCart();
     cart.items = this.AddOrUpdateItem(cart.items, item);
     this.setShoppingCart(cart);
   }
 
-  getItemQuantity(id: string): number {
-    const cart = this.getCurrentCartValue();
-    const exist = cart?.items.some(item => item.id === id);
-    if (!exist) return 0;
+  getCartItem(id: string): ICartItem {
+    const cart = this.getCurrentCartValue() ?? this.loadShoppingCart();
+
+    if (cart.items.length === 0)
+      return null;
+
+    const exist = cart.items.some(item => item.id === id);
+    if (!exist) return null;
 
     const index = cart.items.findIndex(item => item.id === id);
-    return cart.items[index].quantity;
+    return cart.items[index];
   }
 
   private AddOrUpdateItem(items: ICartItem[], item: ICartItem): ICartItem[] {

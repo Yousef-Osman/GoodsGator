@@ -26,14 +26,14 @@
                             <div class="num-block skin-2">
                                 <div class="num-in">
                                     <span (click)="decrementQuantity(product.id)" class="minus control-hover"></span>
-                                    <input type="text" class="in-num" value="{{quantity}}">
+                                    <input [(ngModel)]="quantity" type="text" class="in-num">
                                     <span (click)="incrementQuantity(product.id)" class="plus control-hover"></span>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <fa-icon (click)="addItemToCart()" class="btn btn-primary me-1 btn-sm" [icon]="['fas', 'cart-shopping']"></fa-icon>
-                            <fa-icon (click)="removeItem(product.id)" class="btn btn-danger btn-sm" [icon]="['fas', 'trash-can']"></fa-icon>
+                            <fa-icon (click)="removeItem(product.id)" class="btn btn-danger btn-sm" [hidden]="buttonIsHidden" [icon]="['fas', 'trash-can']"></fa-icon>
                         </div>
                     </div>
                 </div>

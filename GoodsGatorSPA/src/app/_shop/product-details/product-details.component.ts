@@ -15,6 +15,7 @@ import { ShoppingCartService } from 'src/app/_shopping-cart/shopping-cart.servic
 export class ProductDetailsComponent implements OnInit {
   product: IProduct;
   quantity: number = 0;
+  buttonIsHidden: boolean = true;
 
   constructor(library: FaIconLibrary,
     private shopService: ShopService,
@@ -28,18 +29,10 @@ export class ProductDetailsComponent implements OnInit {
     this.shopService.getProduct(id).subscribe({
       next: (res: IProduct) => {
         this.product = res;
-        this.controlItemInCart(res.id);
+        this.getItemQuantity(res.id);
       },
       error: e => console.log(e)
     })
-  }
-
-  controlItemInCart(id: string) {
-    this.quantity =  this.shoppingCartService.getItemQuantity(id);
-  }
-
-  onGoBack() {
-    this.router.navigate(['/products']);
   }
 
   incrementQuantity(id: string) {
@@ -47,18 +40,33 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   decrementQuantity(id: string) {
-    if(this.quantity > 0){
+    if (this.quantity > 0) {
       this.quantity--;
     }
   }
 
-  addItemToCart(){
+  addItemToCart() {
+    if (this.quantity < 1) this.quantity = 1;
     this.shoppingCartService.addItemToCart(this.product, this.quantity);
+    this.buttonIsHidden = false;
   }
 
   removeItem(id: string) {
     this.shoppingCartService.removeCartItem(id);
-    this.controlItemInCart(id);
+    this.buttonIsHidden = true;
+    this.quantity = 0;
   }
 
+  onGoBack() {
+    this.router.navigate(['/products']);
+  }
+
+  private getItemQuantity(id: string) {
+    const item = this.shoppingCartService.getCartItem(id);
+
+    if (item && item.quantity > 0) {
+      this.quantity = item.quantity;
+      this.buttonIsHidden = false;
+    }
+  }
 }
