@@ -8,9 +8,9 @@ namespace GoodsGatorAPI.Repositories;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
-    private readonly ApplicationDbContext _context;
+    private readonly AppDbContext _context;
 
-    public GenericRepository(ApplicationDbContext context)
+    public GenericRepository(AppDbContext context)
     {
         _context = context;
     }

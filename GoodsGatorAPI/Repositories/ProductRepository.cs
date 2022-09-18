@@ -9,9 +9,9 @@ namespace GoodsGatorAPI.Repositories;
 
 public class ProductRepository : IProductRepository
 {
-    private readonly ApplicationDbContext _context;
+    private readonly AppDbContext _context;
 
-    public ProductRepository(ApplicationDbContext context)
+    public ProductRepository(AppDbContext context)
     {
         _context = context;
     }

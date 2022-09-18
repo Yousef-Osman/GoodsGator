@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GoodsGatorAPI.Extensions;
 
-public static class ApplicationServicesExtensions
+public static class AppServicesExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {

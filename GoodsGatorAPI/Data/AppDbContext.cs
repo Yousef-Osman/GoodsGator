@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoodsGatorAPI.Data;
 
-public class ApplicationDbContext: IdentityDbContext
+public class AppDbContext: DbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {}
 
     public DbSet<Product> Products { get; set; }

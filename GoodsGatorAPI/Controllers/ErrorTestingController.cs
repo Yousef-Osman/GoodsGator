@@ -8,9 +8,9 @@ namespace GoodsGatorAPI.Controllers;
 [ApiController]
 public class ErrorTestingController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
+    private readonly AppDbContext _context;
 
-    public ErrorTestingController(ApplicationDbContext context)
+    public ErrorTestingController(AppDbContext context)
     {
         _context = context;
     }
