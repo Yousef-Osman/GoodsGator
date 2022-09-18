@@ -2,6 +2,7 @@ using GoodsGatorAPI.Data;
 using GoodsGatorAPI.Extensions;
 using GoodsGatorAPI.Helpers;
 using GoodsGatorAPI.Middlewares;
+using GoodsGatorAPI.Models.IdentityEntities;
 using GoodsGatorAPI.Repositories;
 using GoodsGatorAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -17,16 +18,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var defaultConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var IdentityConnectionString = builder.Configuration.GetConnectionString("IdentityConnection");
 var redisConnectionString = builder.Configuration.GetConnectionString("RedisConnection");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(defaultConnectionString));
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+//add database files 
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(defaultConnectionString));
+builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(IdentityConnectionString));
+builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<AppIdentityDbContext>().AddSignInManager<SignInManager<AppUser>>();
+
+//to add redis
 builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
 {
     var configuration = ConfigurationOptions.Parse(redisConnectionString, true);
     return ConnectionMultiplexer.Connect(configuration);
-});
+}); 
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -53,9 +59,10 @@ builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", policy => po
     .AllowAnyHeader()
     .AllowAnyMethod()));
 
+builder.Services.AddAuthentication();
+
 //to override the validation behavior of [ApiController] attribute
 builder.Services.AddApplicationServices();
-
 
 var app = builder.Build();
 
@@ -66,8 +73,13 @@ using (var scope = app.Services.CreateScope())
 {
     try
     {
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        context.Database.Migrate();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+        var identityContext = scope.ServiceProvider.GetRequiredService<AppIdentityDbContext>();
+        await identityContext.Database.MigrateAsync();
+        await SeedAppIdentityContext.SeedUserAsync(userManager);
+
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        await context.Database.MigrateAsync();
     }
     catch (Exception)
     {
