@@ -5,9 +5,14 @@ using GoodsGatorAPI.Middlewares;
 using GoodsGatorAPI.Models.IdentityEntities;
 using GoodsGatorAPI.Repositories;
 using GoodsGatorAPI.Repositories.Interfaces;
+using GoodsGatorAPI.Services;
+using GoodsGatorAPI.Services.interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,14 +57,24 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", policy => policy
-    .WithOrigins(builder.Configuration.GetSection("AppSettings:ClientUrl").Value)
+    .WithOrigins(builder.Configuration.GetSection("ClientUrl").Value)
     .AllowAnyHeader()
     .AllowAnyMethod()));
 
-builder.Services.AddAuthentication();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Token:Key").Value)),
+        ValidIssuer = builder.Configuration.GetSection("Token:Issuer").Value,
+        ValidateIssuer = true
+    };
+});
 
 //to override the validation behavior of [ApiController] attribute
 builder.Services.AddApplicationServices();

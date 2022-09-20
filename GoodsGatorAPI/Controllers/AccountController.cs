@@ -1,6 +1,7 @@
 ﻿using GoodsGatorAPI.Helpers.Errors;
 using GoodsGatorAPI.Models.DTOs;
 using GoodsGatorAPI.Models.IdentityEntities;
+using GoodsGatorAPI.Services.interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,15 @@ public class AccountController : ControllerBase
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
+    private readonly ITokenService _tokenService;
 
-    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+    public AccountController(UserManager<AppUser> userManager, 
+                             SignInManager<AppUser> signInManager,
+                             ITokenService tokenService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _tokenService = tokenService;
     }
 
     [HttpPost("login")]
@@ -35,7 +40,7 @@ public class AccountController : ControllerBase
             FirstName = user.FirstName,
             LastName = user.LastName,
             Email = user.Email,
-            Token = "token goes here"
+            Token = _tokenService.createToken(user)
         };
 
         return Ok(userDto);
@@ -61,7 +66,7 @@ public class AccountController : ControllerBase
             FirstName = user.FirstName,
             LastName = user.LastName,
             Email = user.Email,
-            Token = "token goes here"
+            Token = _tokenService.createToken(user)
         };
 
         return Ok(userDto);
