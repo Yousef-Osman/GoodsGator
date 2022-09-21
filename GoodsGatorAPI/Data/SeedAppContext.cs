@@ -3,13 +3,13 @@ using System.Text.Json;
 
 namespace GoodsGatorAPI.Data;
 
-public static class ApplicationContextSeed
+public static class SeedAppContext
 {
     public static IHost SeedData(this IHost host)
     {
         using (var scope = host.Services.CreateScope())
         {
-            using (var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
+            using (var context = scope.ServiceProvider.GetRequiredService<AppDbContext>())
             {
                 try
                 {
@@ -27,7 +27,7 @@ public static class ApplicationContextSeed
         return host;
     }
 
-    private static void SeedBrands(ApplicationDbContext context)
+    private static void SeedBrands(AppDbContext context)
     {
         if (!context.Brands.Any())
         {
@@ -38,7 +38,7 @@ public static class ApplicationContextSeed
         }
     }
 
-    private static void SeedCategories(ApplicationDbContext context)
+    private static void SeedCategories(AppDbContext context)
     {
         if (!context.Categories.Any())
         {
@@ -49,7 +49,7 @@ public static class ApplicationContextSeed
         }
     }
 
-    private static void SeedProducts(ApplicationDbContext context)
+    private static void SeedProducts(AppDbContext context)
     {
         if (!context.Products.Any())
         {
