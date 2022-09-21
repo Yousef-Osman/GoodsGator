@@ -2,8 +2,11 @@ using GoodsGatorAPI.Data;
 using GoodsGatorAPI.Extensions;
 using GoodsGatorAPI.Helpers;
 using GoodsGatorAPI.Middlewares;
+using GoodsGatorAPI.Models.IdentityEntities;
 using GoodsGatorAPI.Repositories;
 using GoodsGatorAPI.Repositories.Interfaces;
+using GoodsGatorAPI.Services;
+using GoodsGatorAPI.Services.interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -16,46 +19,38 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var defaultConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-var redisConnectionString = builder.Configuration.GetConnectionString("RedisConnection");
+var config = builder.Configuration;
+var defaultConnectionString = config.GetConnectionString("DefaultConnection");
+var IdentityConnectionString = config.GetConnectionString("IdentityConnection");
+var redisConnectionString = config.GetConnectionString("RedisConnection");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(defaultConnectionString));
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+//add database files 
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(defaultConnectionString));
+builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(IdentityConnectionString));
+
+//add identity 
+builder.Services.AddIdentityServices(config);
+
+//to add redis database
 builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
 {
     var configuration = ConfigurationOptions.Parse(redisConnectionString, true);
     return ConnectionMultiplexer.Connect(configuration);
 });
 
-builder.Services.Configure<IdentityOptions>(options =>
-{
-    // Password settings.
-    options.Password.RequireDigit = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 6;
-    options.Password.RequiredUniqueChars = 0;
-
-    // User settings.
-    options.User.AllowedUserNameCharacters =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-});
-
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", policy => policy
-    .WithOrigins(builder.Configuration.GetSection("AppSettings:ClientUrl").Value)
+    .WithOrigins(config.GetSection("ClientUrl").Value)
     .AllowAnyHeader()
     .AllowAnyMethod()));
 
 //to override the validation behavior of [ApiController] attribute
 builder.Services.AddApplicationServices();
-
 
 var app = builder.Build();
 
@@ -66,8 +61,13 @@ using (var scope = app.Services.CreateScope())
 {
     try
     {
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        context.Database.Migrate();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+        var identityContext = scope.ServiceProvider.GetRequiredService<AppIdentityDbContext>();
+        await identityContext.Database.MigrateAsync();
+        await SeedAppIdentityContext.SeedUserAsync(userManager);
+
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        await context.Database.MigrateAsync();
     }
     catch (Exception)
     {

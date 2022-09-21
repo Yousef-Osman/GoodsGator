@@ -1,6 +1,7 @@
 ﻿using GoodsGatorAPI.Data;
 using GoodsGatorAPI.Helpers.Errors;
 using GoodsGatorAPI.Models.DbEntities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodsGatorAPI.Controllers;
@@ -8,9 +9,9 @@ namespace GoodsGatorAPI.Controllers;
 [ApiController]
 public class ErrorTestingController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
+    private readonly AppDbContext _context;
 
-    public ErrorTestingController(ApplicationDbContext context)
+    public ErrorTestingController(AppDbContext context)
     {
         _context = context;
     }
@@ -40,5 +41,12 @@ public class ErrorTestingController : ControllerBase
         var str = product.ToString();
 
         return Ok(str);
+    }
+
+    [Authorize]
+    [HttpGet("AuthTest")]
+    public IActionResult AuthTest()
+    {
+        return Ok("auth works");
     }
 }
