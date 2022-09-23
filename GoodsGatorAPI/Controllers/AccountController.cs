@@ -1,8 +1,10 @@
-﻿using GoodsGatorAPI.Helpers.Errors;
+﻿using AutoMapper;
+using GoodsGatorAPI.Extensions;
+using GoodsGatorAPI.Helpers.Errors;
 using GoodsGatorAPI.Models.DTOs;
 using GoodsGatorAPI.Models.IdentityEntities;
 using GoodsGatorAPI.Services.interfaces;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,14 +16,17 @@ public class AccountController : ControllerBase
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
     private readonly ITokenService _tokenService;
+    private readonly IMapper _mapper;
 
     public AccountController(UserManager<AppUser> userManager, 
                              SignInManager<AppUser> signInManager,
-                             ITokenService tokenService)
+                             ITokenService tokenService,
+                             IMapper mapper)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _tokenService = tokenService;
+        _mapper = mapper;
     }
 
     [HttpPost("login")]
@@ -70,5 +75,26 @@ public class AccountController : ControllerBase
         };
 
         return Ok(userDto);
+    }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> GetCurrentUser()
+    {
+        var user = await _userManager.FindUserAsync(User);
+        return Ok(_mapper.Map<AppUser, UserDTO>(user));
+    }
+
+    [Authorize]
+    [HttpGet("Address")]
+    public async Task<IActionResult> GetUserAddress()
+    {
+        var user = await _userManager.FindUserWithAddressAsync(User);
+        return Ok(_mapper.Map<Address, AddressDTO>(user.Address));
+    }
+
+    private async Task<bool> CheckEmailExistsAsync(string email)
+    {
+        return await _userManager.FindByIdAsync(email) != null;
     }
 }
