@@ -40,15 +40,7 @@ public class AccountController : ControllerBase
 
         if (!result.Succeeded) return Unauthorized(new ApiResponse(401));
 
-        var userDto = new UserDTO
-        {
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            Email = user.Email,
-            Token = _tokenService.createToken(user)
-        };
-
-        return Ok(userDto);
+        return Ok(GetUserDto(user));
     }
 
     [HttpPost("register")]
@@ -66,23 +58,15 @@ public class AccountController : ControllerBase
 
         if (!result.Succeeded) return BadRequest(new ApiResponse(400));
 
-        var userDto = new UserDTO
-        {
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            Email = user.Email,
-            Token = _tokenService.createToken(user)
-        };
-
-        return Ok(userDto);
+        return Ok(GetUserDto(user));
     }
 
     [Authorize]
-    [HttpGet]
+    [HttpGet("CurrentUser")]
     public async Task<IActionResult> GetCurrentUser()
     {
         var user = await _userManager.FindUserAsync(User);
-        return Ok(_mapper.Map<AppUser, UserDTO>(user));
+        return Ok(GetUserDto(user));
     }
 
     [Authorize]
@@ -93,8 +77,36 @@ public class AccountController : ControllerBase
         return Ok(_mapper.Map<Address, AddressDTO>(user.Address));
     }
 
-    private async Task<bool> CheckEmailExistsAsync(string email)
+    [Authorize]
+    [HttpPost("UpdateAddress")]
+    public async Task<IActionResult> UpdateAddress(AddressDTO addressDto)
     {
-        return await _userManager.FindByIdAsync(email) != null;
+        var address = _mapper.Map<AddressDTO, Address>(addressDto);
+
+        var user = await _userManager.FindUserWithAddressAsync(User);
+        user.Address = address;
+        var result = await _userManager.UpdateAsync(user);
+
+        if (!result.Succeeded) return BadRequest(new ApiResponse(400));
+
+        return Ok(GetUserDto(user));
+    }
+
+    [HttpGet("CheckEmail")]
+    public async Task<IActionResult> CheckEmailExists([FromQuery] string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        return Ok(user != null);
+    }
+
+    private UserDTO GetUserDto(AppUser user)
+    {
+        return new UserDTO
+        {
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            Token = _tokenService.createToken(user)
+        };
     }
 }
