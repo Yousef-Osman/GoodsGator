@@ -78,7 +78,7 @@ public class AccountController : ControllerBase
     }
 
     [Authorize]
-    [HttpPost("UpdateAddress")]
+    [HttpPut("UpdateAddress")]
     public async Task<IActionResult> UpdateAddress(AddressDTO addressDto)
     {
         var address = _mapper.Map<AddressDTO, Address>(addressDto);
@@ -89,7 +89,7 @@ public class AccountController : ControllerBase
 
         if (!result.Succeeded) return BadRequest(new ApiResponse(400));
 
-        return Ok(GetUserDto(user));
+        return Ok(_mapper.Map<Address, AddressDTO>(user.Address));
     }
 
     [HttpGet("CheckEmail")]

@@ -125,7 +125,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJBZG1pbiBVc2VyIiwibmJmIjoxNjYzODMxMjcxLCJleHAiOjE2NjQ2OTUyNzEsImlhdCI6MTY2MzgzMTI3MSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDA0MDQvIn0.VnSosWqzsil4IgnQ-cUhje4fGyo9sHaW9sE7RjmOK5phW3PWjBYcrkOz0iS3sf0Lx1wpFtu7_Qb978PXyd0ccA",
+									"value": "{{accessToken}}",
 									"type": "string"
 								}
 							]
@@ -249,6 +249,22 @@
 			"item": [
 				{
 					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.environment.set(\"accessToken\", jsonData.token);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -290,14 +306,141 @@
 							}
 						},
 						"url": {
-							"raw": "{{apiBaseUrl}}/api/Account/REGISTER",
+							"raw": "{{apiBaseUrl}}/api/Account/Register",
 							"host": [
 								"{{apiBaseUrl}}"
 							],
 							"path": [
 								"api",
 								"Account",
-								"REGISTER"
+								"Register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/Account/CurrentUser",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"Account",
+								"CurrentUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/Account/Address",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"Account",
+								"Address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullAddress\": \"updated user Address\",\r\n    \"city\": \"Alexandria updated\",\r\n    \"governorate\": \"Alexandria\",\r\n    \"country\": \"Egypt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/Account/UpdateAddress",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"Account",
+								"UpdateAddress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Email Exists",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiBaseUrl}}/api/Account/CheckEmail",
+							"host": [
+								"{{apiBaseUrl}}"
+							],
+							"path": [
+								"api",
+								"Account",
+								"CheckEmail"
 							]
 						}
 					},

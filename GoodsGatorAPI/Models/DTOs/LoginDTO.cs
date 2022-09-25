@@ -4,8 +4,8 @@ namespace GoodsGatorAPI.Models.DTOs;
 
 public class LoginDTO
 {
-    [Required]
+    [Required, EmailAddress]
     public string Email { get; set; }
-    [Required]
+    [Required, DataType(DataType.Password)]
     public string Password { get; set; }
 }
