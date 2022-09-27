@@ -1,4 +1,6 @@
-﻿using GoodsGatorAPI.Models.RedisEntities;
+﻿using AutoMapper;
+using GoodsGatorAPI.Models.DTOs;
+using GoodsGatorAPI.Models.RedisEntities;
 using GoodsGatorAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +11,12 @@ namespace GoodsGatorAPI.Controllers;
 public class ShoppingCartController : ControllerBase
 {
     private readonly IShoppingCartRepository _shoppingCartRepository;
+    private readonly IMapper _mapper;
 
-    public ShoppingCartController(IShoppingCartRepository shoppingCartRepository)
+    public ShoppingCartController(IShoppingCartRepository shoppingCartRepository, IMapper mapper)
     {
         _shoppingCartRepository = shoppingCartRepository;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -23,8 +27,9 @@ public class ShoppingCartController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddOrUpdateCartAsync(ShoppingCart cart)
+    public async Task<IActionResult> AddOrUpdateCartAsync(ShoppingCartDTO cartDto)
     {
+        var cart = _mapper.Map<ShoppingCartDTO, ShoppingCart>(cartDto);
         var dbCart = await _shoppingCartRepository.AddOrUpdateAsync(cart);
         return Ok(dbCart);
     }
