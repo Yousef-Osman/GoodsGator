@@ -1,10 +1,3 @@
-
-body {
-    font-family: 'Roboto', sans-serif !important;
-    height: 100vh;
-    color: #3a3e42 !important;
-}
-
 body {
     background: #c9ccd1;
 }
@@ -32,6 +25,10 @@ body {
     color: #ccc;
 }
 
+.button-height {
+    height: 40px;
+}
+
 .sideline:before,
 .sideline:after {
     content: '';
@@ -45,50 +42,11 @@ body {
 }
 
 .gradient-button {
-    // background: linear-gradient(45deg, #8D334C, #CF6964);
-    // background: linear-gradient(45deg, #1FA2FF, #12D8FA);
     background: linear-gradient(45deg, #007bd3, #3dc2ff);
-    // background: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
     border: 0;
     border-radius: 0;
 }
 
-.AppFormRight {
-    background-image: url('/assets/images/site/registerbg.jpg');
-    height: 450px;
-    background-size: cover;
-    background-position: center;
+.lightblue-text{
+    color:#0389e9;
 }
-
-.AppFormRight:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #005fa3, #23aae9);
-    // background: linear-gradient(45deg, #0094fd, #3dc2ff);
-    // background: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
-    opacity: 0.5;
-}
-
-.AppFormRight h2 {
-    z-index: 1;
-}
-
-.AppFormRight h2::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: #fff;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.AppFormRight p {
-    z-index: 1;
-}
-
-
- 
