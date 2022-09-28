@@ -46,6 +46,11 @@ public class AccountController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDTO registerDto)
     {
+        var exists = await _userManager.FindByEmailAsync(registerDto.Email) != null;
+
+        if (exists) 
+            return BadRequest(new ApiValidationErrorResponse(new[] { "Email is already taken"}));
+
         var user = new AppUser
         {
             FirstName = registerDto.FirstName,
