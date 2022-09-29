@@ -390,11 +390,11 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fullAddress\": \"updated user Address\",\r\n    \"city\": \"Alexandria updated\",\r\n    \"governorate\": \"Alexandria\",\r\n    \"country\": \"Egypt\"\r\n}",
+							"raw": "{\r\n    \"fullAddress\": \"Borg El Arab\",\r\n    \"city\": \"Alexandria\",\r\n    \"governorate\": \"Alexandria\",\r\n    \"country\": \"Egypt\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -424,16 +424,23 @@
 						"method": "GET",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"admin@gmail.com\"\r\n}",
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "default",
+									"disabled": true
+								}
+							],
 							"options": {
 								"raw": {
-									"language": "json"
+									"language": "text"
 								}
 							}
 						},
 						"url": {
-							"raw": "{{apiBaseUrl}}/api/Account/CheckEmail",
+							"raw": "{{apiBaseUrl}}/api/Account/CheckEmail?email=admin@gmail.com",
 							"host": [
 								"{{apiBaseUrl}}"
 							],
@@ -441,6 +448,12 @@
 								"api",
 								"Account",
 								"CheckEmail"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com"
+								}
 							]
 						}
 					},
