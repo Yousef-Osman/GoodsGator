@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCartShopping as fasCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
-import { IShoppingCart } from 'src/app/_shared/interfaces/IShoppingCart';
+import { IShoppingCart } from 'src/app/_shared/interfaces/iShoppingCart';
 import { ShoppingCartService } from 'src/app/_shopping-cart/shopping-cart.service';
 
 @Component({

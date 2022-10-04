@@ -1,4 +1,4 @@
-import { IShoppingCart, ICartItem } from "../interfaces/IShoppingCart";
+import { IShoppingCart, ICartItem } from "../interfaces/iShoppingCart";
 import { v4 as uuidv4 } from 'uuid';
 
 export class ShoppingCart implements IShoppingCart {
