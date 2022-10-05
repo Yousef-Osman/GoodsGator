@@ -45,7 +45,10 @@ body {
 }
 
 .gradient-button {
-    background: linear-gradient(45deg, #8D334C, #CF6964);
+    // background: linear-gradient(45deg, #8D334C, #CF6964);
+    // background: linear-gradient(45deg, #1FA2FF, #12D8FA);
+    background: linear-gradient(45deg, #007bd3, #3dc2ff);
+    // background: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
     border: 0;
     border-radius: 0;
 }
@@ -62,7 +65,9 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, #8D334C, #CF6964);
+    background: linear-gradient(45deg, #005fa3, #23aae9);
+    // background: linear-gradient(45deg, #0094fd, #3dc2ff);
+    // background: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
     opacity: 0.5;
 }
 
@@ -84,3 +89,6 @@ body {
 .AppFormRight p {
     z-index: 1;
 }
+
+
+ 
